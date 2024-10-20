@@ -3,9 +3,7 @@
 
 # 👋 Hi there, I'm Vraj Nena
 
-<div align="center">
-  <img src="https://media.giphy.com/media/ve43TyDQ3B4me7d22z/giphy.gif" width="600" height="300"/>
-</div>
+
 
 ## 👨‍💻 About Me
 
@@ -20,7 +18,7 @@
 ### Vital Voices (Ongoing)
 - 🧠 Analyzing mental health trends and suicide ideation, focusing on men's mental health due to gambling
 - 🛠️ Tech Stack: Python, SQL, Azure Cloud Services, API Integration, CRON, Azure DevOps, GitHub Actions
-- 🔗 [Project Link](https://your-project-link-here) (Password: tp35fit5120)
+- 🔗 [Project Link](https://vitalvoices.live) 
 
 ### Object Detection on Kubernetes Platform (Completed)
 - 🖼️ Developed a scalable platform for object detection using ML algorithms
@@ -52,11 +50,6 @@
 - Google Cloud
 - Big Data Engineering (ongoing)
 
-## 📊 GitHub Stats
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=vrajnena&show_icons=true&theme=radical" alt="GitHub Stats" />
-</div>
 
 ## 📚 Education
 
@@ -67,7 +60,7 @@
 ## 📫 Connect with Me
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vrajnena/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-1f425f?style=for-the-badge&logo=website&logoColor=white)](https://your-portfolio-website.com)
+[![Portfolio](https://img.shields.io/badge/Portfolio-1f425f?style=for-the-badge&logo=website&logoColor=white)](https://vnen0001.github.io/vrajnena.github.io/)
 
 ---
 
