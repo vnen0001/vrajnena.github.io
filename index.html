@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vraj Nena</title>
-    
+
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
     <link rel="manifest" href="site.webmanifest">
-    
+
     <!-- Meta tags -->
-    <meta name="description" content="Vraj Nena's professional portfolio showcasing data science projects, skills, and certifications. Experienced in Python, R, SQL, and cloud technologies.">
+    <meta name="description"
+        content="Vraj Nena's professional portfolio showcasing data science projects, skills, and certifications. Experienced in Python, R, SQL, and cloud technologies.">
     <meta name="keywords" content="Vraj Nena, Data Science, Portfolio, Python, R, SQL, Azure, Machine Learning">
-    
+
     <!-- Styles and Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Calendly widget -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGBMY1BKCV"></script>
     <script>
+        const isDevEnvironment = () => {
+            const hostname = window.location.hostname;
+            return hostname === "localhost" 
+                   || hostname === "127.0.0.1"
+                   || hostname.includes(".local")
+                   || hostname.includes(".test");
+        };
+        
+        if (isDevEnvironment()) {
+            window['gtag-disable-G-FGBMY1BKCV'] = true;
+        }
+        
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-FGBMY1BKCV');
-    </script>
-    
+        </script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #5A3853;
         }
+
         .gradient-border {
             position: relative;
             border-bottom: 2px solid transparent;
@@ -46,7 +63,7 @@
             background-clip: text;
             -webkit-background-clip: text;
         }
-        
+
         .gradient-border::after {
             content: '';
             position: absolute;
@@ -57,67 +74,75 @@
             background: linear-gradient(90deg, #5A3853, #6C4E66);
             transition: width 0.3s ease;
         }
-        
+
         .gradient-border:hover::after {
             width: 100%;
         }
+
         .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
+
         body.loading {
             overflow: hidden;
         }
-        
+
         .fade-out {
             animation: fadeOut 0.5s ease-out forwards;
         }
-        
+
         @keyframes fadeOut {
             from {
                 opacity: 1;
             }
+
             to {
                 opacity: 0;
                 visibility: hidden;
             }
         }
-        
+
         .content-fade-in {
             opacity: 0;
             animation: fadeIn 0.5s ease-out forwards;
         }
-        
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
         }
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGBMY1BKCV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGBMY1BKCV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-FGBMY1BKCV');
-</script>
+        gtag('config', 'G-FGBMY1BKCV');
+    </script>
 
 </head>
+
 <body class="bg-gray-50 text-gray-800">
-    <div id="loading-screen" class="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-r from-blue-800 to-indigo-900">
+    <div id="loading-screen"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-r from-blue-800 to-indigo-900">
         <div class="relative">
             <!-- Loading Animation -->
             <div class="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
             <!-- Your logo in the center -->
-            <img src="./logo.png" alt="Logo" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 object-contain">
+            <img src="./logo.png" alt="Logo"
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 object-contain">
         </div>
         <p class="absolute mt-24 text-white text-lg font-medium">Won't be Long...</p>
     </div>
@@ -126,19 +151,20 @@
         <div class="container mx-auto px-6">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center space-x-3">
-                    <div class="h-10 w-10 bg-gradient-to-r from-blue-800 to-indigo-900 rounded-lg flex items-center justify-center">
-                        <a href="https://vrajnena.tech"><img src="logo.png" 
-                             alt="Vraj Nena" 
-                             class="h-10 w-10 rounded-lg object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
-                             ></a>
+                    <div
+                        class="h-10 w-10 bg-gradient-to-r from-blue-800 to-indigo-900 rounded-lg flex items-center justify-center">
+                        <a href="https://vrajnena.tech"><img src="logo.png" alt="Vraj Nena"
+                                class="h-10 w-10 rounded-lg object-cover shadow-md transition-transform duration-300 group-hover:scale-105"></a>
                     </div>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#about" class="gradient-border text-gray-600 py-2">About</a>
                     <a href="#education" class="gradient-border text-gray-600 py-2">Education</a>
                     <a href="#projects" class="gradient-border text-gray-600 py-2">Projects</a>
+                    <a href="#Hire-Me" class="gradient-border text-gray-600 py-2">Hire Me</a>
                     <a href="#skills" class="gradient-border text-gray-600 py-2">Skills</a>
-                    <a href="#Calendly" class="px-6 py-2 bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-full hover:shadow-lg transition duration-300">Contact</a>
+                    <a href="#Calendly"
+                        class="px-6 py-2 bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-full hover:shadow-lg transition duration-300">Contact</a>
                 </div>
             </div>
         </div>
@@ -151,8 +177,8 @@
                 <div class="mb-8 md:mb-0 md:mr-12">
                     <div class="relative">
                         <div class="absolute inset-0 bg-white/20 rounded-full blur-xl"></div>
-                        <img src="vraj-nena-photo.jpg" alt="Vraj Nena" 
-                             class="rounded-full w-48 h-48 object-cover border-4 border-white shadow-xl relative z-10">
+                        <img src="vraj-nena-photo.jpg" alt="Vraj Nena"
+                            class="rounded-full w-48 h-48 object-cover border-4 border-white shadow-xl relative z-10">
                     </div>
                 </div>
                 <div class="text-center md:text-left flex-grow">
@@ -163,33 +189,36 @@
                             <i class="fas fa-envelope w-6"></i>
                             <a href="mailto:vrajnena44@gmail.com" class="hover:underline">vrajnena44@gmail.com</a>
                         </div>
-                       
+
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-map-marker-alt w-6"></i>
                             <span>Box Hill North,VIC,3129</span>
                         </div>
-                      
+
                         <div class="flex space-x-6">
                             <a href="https://linkedin.com/in/vrajnena" class="group">
-                                <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-blue-600 transition duration-300">
+                                <div
+                                    class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-blue-600 transition duration-300">
                                     <i class="fab fa-linkedin text-xl"></i>
                                 </div>
                             </a>
                             <a href="https://github.com/vnen0001" class="group">
-                                <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-gray-700 transition duration-300">
+                                <div
+                                    class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-gray-700 transition duration-300">
                                     <i class="fab fa-github text-xl"></i>
                                 </div>
                             </a>
-                           
+
                         </div>
                     </div>
                     <div class="mt-8 flex flex-wrap gap-4">
-                        <a href="https://drive.google.com/file/d/1LgKuxIy8R0sOrBldz-3BwxswY9elz8VT/view?usp=sharing" target="_blank"
-                           class="inline-flex items-center px-6 py-3 bg-white text-blue-800 rounded-full hover:shadow-lg transition duration-300">
+                        <a href="https://drive.google.com/file/d/1LgKuxIy8R0sOrBldz-3BwxswY9elz8VT/view?usp=sharing"
+                            target="_blank"
+                            class="inline-flex items-center px-6 py-3 bg-white text-blue-800 rounded-full hover:shadow-lg transition duration-300">
                             <i class="fas fa-download mr-2"></i>Download CV
                         </a>
-                        <a href="#Calendly" 
-                           class="inline-flex items-center px-6 py-3 bg-blue-700 text-white rounded-full hover:shadow-lg transition duration-300">
+                        <a href="#Calendly"
+                            class="inline-flex items-center px-6 py-3 bg-blue-700 text-white rounded-full hover:shadow-lg transition duration-300">
                             <i class="fas fa-calendar mr-2"></i>Schedule a Talk
                         </a>
                     </div>
@@ -205,9 +234,12 @@
             <h2 class="text-3xl font-bold mb-8 text-blue-800">About Me</h2>
             <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
                 <p class="text-lg leading-relaxed">
-                    Dynamic and result-driven data science graduate with a passion for extracting meaningful insights from complex datasets. 
-                    Experienced in leading projects, implementing robust data pipelines, and leveraging cloud technologies to solve real-world problems. 
-                    Seeking opportunities to apply my skills in machine learning, data analysis, and cloud computing to drive data-informed decision-making.
+                    Dynamic and result-driven data science graduate with a passion for extracting meaningful insights
+                    from complex datasets.
+                    Experienced in leading projects, implementing robust data pipelines, and leveraging cloud
+                    technologies to solve real-world problems.
+                    Seeking opportunities to apply my skills in machine learning, data analysis, and cloud computing to
+                    drive data-informed decision-making.
                 </p>
             </div>
         </section>
@@ -270,7 +302,8 @@
                             </div>
                             <h3 class="text-xl font-semibold">Vital Voices</h3>
                         </div>
-                        <p class="mb-4 text-gray-600">Data-driven analysis of mental health trends and suicide ideation, focusing on men's mental health and gambling.</p>
+                        <p class="mb-4 text-gray-600">Data-driven analysis of mental health trends and suicide ideation,
+                            focusing on men's mental health and gambling.</p>
                         <ul class="space-y-2 mb-6">
                             <li class="flex items-center space-x-2">
                                 <i class="fas fa-check text-green-500"></i>
@@ -303,92 +336,260 @@
 
                         </div>
                         <a href="https://vitalvoices.live" target="_blank" rel="noopener noreferrer"
-                           class="inline-flex items-center px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition duration-300">
+                            class="inline-flex items-center px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition duration-300">
                             <i class="fas fa-external-link-alt mr-2"></i>
                             View Project
                         </a>
                     </div>
                 </div>
 
-                
-<div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-    <div class="p-6">
-        <div class="flex items-center mb-4">
-            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                <i class="fas fa-cube text-blue-800"></i>
-            </div>
-            <h3 class="text-xl font-semibold">Object Detection on Kubernetes</h3>
-        </div>
-        <p class="mb-4 text-gray-600">Scalable platform for object detection using advanced machine learning algorithms on Kubernetes to idnetify objects on uploaded images.</p>
-        <ul class="space-y-2 mb-6">
-            <li class="flex items-center space-x-2">
-                <i class="fas fa-check text-green-500"></i>
-                <span>Built scalable Kubernetes cluster architecture</span>
-            </li>
-            <li class="flex items-center space-x-2">
-                <i class="fas fa-check text-green-500"></i>
-                <span>Implemented Pre-trained YOLO model deployment</span>
-            </li>
-            <li class="flex items-center space-x-2">
-                <i class="fas fa-check text-green-500"></i>
-                <span>Developed React frontend with Docker</span>
-            </li>
 
-            <li class="flex items-center space-x-2">
-                <i class="fas fa-check text-green-500"></i>
-                <span>Load tested with 10+ concurrent users</span>
-            </li>
-        </ul>
-        <div class="flex flex-wrap gap-2 mb-6">
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Kubernetes</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Docker</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Oracle Cloud</span>
-        </div>
-       
-    </div>
-</div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-cube text-blue-800"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">Object Detection on Kubernetes</h3>
+                        </div>
+                        <p class="mb-4 text-gray-600">Scalable platform for object detection using advanced machine
+                            learning algorithms on Kubernetes to idnetify objects on uploaded images.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Built scalable Kubernetes cluster architecture</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Implemented Pre-trained YOLO model deployment</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Developed React frontend with Docker</span>
+                            </li>
 
-<!-- Traffic Congestion Analysis Project -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-    <div class="p-6">
-        <div class="flex items-center mb-4">
-            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                <i class="fas fa-traffic-light text-blue-800"></i>
-            </div>
-            <h3 class="text-xl font-semibold">Traffic Congestion Analysis</h3>
-        </div>
-        <p class="mb-4 text-gray-600">Comprehensive analysis of Melbourne's traffic patterns and congestion hotspots using VicRoads API data, enabling data-driven traffic management solutions.</p>
-        <ul class="space-y-2 mb-6">
-            <li class="flex items-center space-x-2">
-                <i class="fas fa-check text-green-500"></i>
-                <span>Developed real-time Tableau dashboards</span>
-            </li>
-            <li class="flex items-center space-x-2">
-                <i class="fas fa-check text-green-500"></i>
-                <span>Used VicRoads Data API </span>
-            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Load tested with 10+ concurrent users</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Kubernetes</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Docker</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Oracle Cloud</span>
+                        </div>
 
-            <li class="flex items-center space-x-2">
-                <i class="fas fa-check text-green-500"></i>
-                <span>Identified  major congestion hotspots in Melbourne</span>
-            </li>
-        </ul>
-        <div class="flex flex-wrap gap-2 mb-6">
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">SQL</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Tableau</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Azure</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">GIS</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Statistics</span>
-        </div>
-       
-    </div>
-</div>
+                    </div>
+                </div>
+
+                <!-- Traffic Congestion Analysis Project -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-traffic-light text-blue-800"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">Traffic Congestion Analysis</h3>
+                        </div>
+                        <p class="mb-4 text-gray-600">Comprehensive analysis of Melbourne's traffic patterns and
+                            congestion hotspots using VicRoads API data, enabling data-driven traffic management
+                            solutions.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Developed real-time Tableau dashboards</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Used VicRoads Data API </span>
+                            </li>
+
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Identified major congestion hotspots in Melbourne</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">SQL</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Tableau</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Azure</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">GIS</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Statistics</span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </section>
 
+        <section id="Hire-Me"  class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
+                        Why Hire Me?
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-600">
+                        Here's what makes me a strong candidate for your team
+                    </p>
+                </div>
+
+                <!-- Reasons Grid -->
+                <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    <!-- Technical Expertise -->
+                    <div
+                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-laptop-code text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Technical Expertise
+                            </h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Strong foundation in data science with hands-on experience in Python, R, and SQL. Proven
+                            ability to work with cloud platforms and modern data engineering tools.
+                        </p>
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                        </div>
+                    </div>
+
+                    <!-- Project Leadership -->
+                    <div
+                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-users text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Project Leadership
+                            </h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Successfully led multiple university projects using Agile methodologies. Demonstrated
+                            ability to coordinate team efforts and deliver high-quality results.
+                        </p>
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                        </div>
+                    </div>
+
+                    <!-- Problem-Solving Skills -->
+                    <div
+                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-lightbulb text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Problem-Solving Skills
+                            </h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Strong analytical mindset with experience in implementing complex solutions, from traffic
+                            analysis to scalable object detection systems.
+                        </p>
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                        </div>
+                    </div>
+
+                    <!-- Continuous Learning -->
+                    <div
+                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Continuous Learning
+                            </h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Consistently pursuing professional development through certifications in Databricks, Azure
+                            AI, and Google Cloud.
+                        </p>
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                        </div>
+                    </div>
+
+                    <!-- Data Pipeline Expertise -->
+                    <div
+                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-database text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Data Pipeline Expertise
+                            </h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Experience in designing and implementing end-to-end data pipelines using CRON jobs, Redis,
+                            and cloud infrastructure.
+                        </p>
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                        </div>
+                    </div>
+
+                    <!-- Cloud Proficiency -->
+                    <div
+                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-cloud text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Cloud Proficiency
+                            </h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Hands-on experience with Azure and Oracle Cloud, including deployment of web applications
+                            and managing cloud infrastructure.
+                        </p>
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-16 text-center">
+                    <a href="#Calendly" class="group relative inline-flex items-center justify-center">
+                        <!-- Primary Button -->
+                        <button class="relative px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-lg font-semibold rounded-full transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+                            <span class="flex items-center">
+                                <span>Hire Me</span>
+                                <i class="fas fa-arrow-down ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </span>
+                        </button>
+                        
+                        <!-- Animated Background Effect -->
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300 -z-10"></div>
+                    </a>
+                    
+                    <!-- Additional Text -->
+                    <p class="mt-4 text-gray-600">Let's discuss how I can contribute to your team</p>
+                </div>
+            </div>
+        </section>
         <!-- Skills Section -->
         <section id="skills" class="mb-20">
             <!-- Content remains the same but with enhanced styling -->
@@ -411,25 +612,29 @@
                         <ul class="space-y-2">
                             <li>
                                 <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://credentials.databricks.com/c4823983-ee55-42df-9380-a7f1a1772b9c#gs.f48ve4" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                                <a href="https://credentials.databricks.com/c4823983-ee55-42df-9380-a7f1a1772b9c#gs.f48ve4"
+                                    target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
                                     Databricks DataLake House Fundamentals
                                 </a>
                             </li>
                             <li>
                                 <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://www.hackerrank.com/certificates/ed3753fac189" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                                <a href="https://www.hackerrank.com/certificates/ed3753fac189" target="_blank"
+                                    rel="noopener noreferrer" class="text-blue-600 hover:underline">
                                     HackerRank SQL (Basic) Certificate
                                 </a>
                             </li>
                             <li>
                                 <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://www.credly.com/badges/439e7b1b-5716-4af9-8ee0-390bb77f51cb/public_ur" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                                <a href="https://www.credly.com/badges/439e7b1b-5716-4af9-8ee0-390bb77f51cb/public_ur"
+                                    target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
                                     Microsoft Certified: Azure AI Fundamentals
                                 </a>
                             </li>
                             <li>
                                 <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/XCE2MWA3YUBF" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                                <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/XCE2MWA3YUBF"
+                                    target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
                                     Google Cloud Specialization
                                 </a>
                             </li>
@@ -441,7 +646,7 @@
                     </div>
                 </div>
             </div>
-             
+
         </section>
 
         <!-- Contact Section -->
@@ -450,16 +655,17 @@
             <div>
 
 
-                <div class="calendly-inline-widget" data-url="https://calendly.com/vrajnena44/30min" style="min-width:320px;height:630px;"></div>
-               
-            </div> 
+                <div class="calendly-inline-widget" data-url="https://calendly.com/vrajnena44/30min"
+                    style="min-width:320px;height:630px;"></div>
+
+            </div>
         </section>
     </main>
-    
+
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" 
-            class="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-full shadow-lg hover:shadow-xl transition duration-300 hidden">
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-full shadow-lg hover:shadow-xl transition duration-300 hidden">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -470,57 +676,59 @@
                 <p class="text-gray-400 mb-4 md:mb-0">&copy; 2024 Vraj Nena. All rights reserved.</p>
                 <div class="flex space-x-6">
                     <a href="https://linkedin.com/in/vrajnena" class="group">
-                        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-blue-600 transition duration-300">
+                        <div
+                            class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-blue-600 transition duration-300">
                             <i class="fab fa-linkedin text-xl"></i>
                         </div>
                     </a>
                     <a href="https://github.com/vnen0001" class="group">
-                        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-gray-700 transition duration-300">
+                        <div
+                            class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-gray-700 transition duration-300">
                             <i class="fab fa-github text-xl"></i>
                         </div>
                     </a>
-                   
+
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-            document.body.classList.add('loading');
-    
-    // Function to hide loading screen
-    function hideLoadingScreen() {
-        const loadingScreen = document.getElementById('loading-screen');
-        const mainContent = document.querySelector('main');
-        
-        // Add fade out animation to loading screen
-        loadingScreen.classList.add('fade-out');
-        
-        // Add fade in animation to main content
-        mainContent.classList.add('content-fade-in');
-        
-        // Remove loading class from body
-        document.body.classList.remove('loading');
-        
-        // Remove loading screen after animation
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500);
-    }
+        document.body.classList.add('loading');
 
-    // Listen for when the page is fully loaded
-    window.addEventListener('load', () => {
-        // Add a small delay to ensure smooth animation
-        setTimeout(hideLoadingScreen, 500);
-    });
+        // Function to hide loading screen
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.querySelector('main');
 
-    // Fallback: Hide loading screen after 5 seconds even if page hasn't fully loaded
-    setTimeout(hideLoadingScreen, 5000);
-    
-    // Handle errors during loading
-    window.addEventListener('error', () => {
-        hideLoadingScreen();
-    });
+            // Add fade out animation to loading screen
+            loadingScreen.classList.add('fade-out');
+
+            // Add fade in animation to main content
+            mainContent.classList.add('content-fade-in');
+
+            // Remove loading class from body
+            document.body.classList.remove('loading');
+
+            // Remove loading screen after animation
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+
+        // Listen for when the page is fully loaded
+        window.addEventListener('load', () => {
+            // Add a small delay to ensure smooth animation
+            setTimeout(hideLoadingScreen, 500);
+        });
+
+        // Fallback: Hide loading screen after 5 seconds even if page hasn't fully loaded
+        setTimeout(hideLoadingScreen, 5000);
+
+        // Handle errors during loading
+        window.addEventListener('error', () => {
+            hideLoadingScreen();
+        });
         // Mobile Menu Functionality
         const handleMobileMenu = () => {
             const mobileMenu = document.getElementById('mobile-menu');
@@ -557,7 +765,7 @@
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
+
                 const target = document.querySelector(targetId);
                 if (target) {
                     target.scrollIntoView({
@@ -581,7 +789,7 @@
         };
 
         window.addEventListener('scroll', handleScroll);
-        
+
         backToTop.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -649,4 +857,5 @@
         });
     </script> -->
 </body>
+
 </html>
