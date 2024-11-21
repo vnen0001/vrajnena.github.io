@@ -1,910 +1,480 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vraj Nena</title>
+    <title>Vraj Nena Portfolio</title>
 
-    <!-- Favicon Links -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
-    <link rel="manifest" href="site.webmanifest">
-
-    <!-- Meta tags -->
-    <meta name="description"
-        content="Vraj Nena's professional portfolio showcasing data science projects, skills, and certifications. Experienced in Python, R, SQL, and cloud technologies.">
-    <meta name="keywords" content="Vraj Nena, Data Science, Portfolio, Python, R, SQL, Azure, Machine Learning">
-
-    <!-- Styles and Scripts -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Calendly widget -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGBMY1BKCV"></script>
-    <script>
-        const isDevEnvironment = () => {
-            const hostname = window.location.hostname;
-            return hostname === "localhost" 
-                   || hostname === "127.0.0.1"
-                   || hostname.includes(".local")
-                   || hostname.includes(".test");
-        };
-        
-        if (isDevEnvironment()) {
-            window['gtag-disable-G-FGBMY1BKCV'] = true;
-        }
-        
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-FGBMY1BKCV');
-        </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #5A3853;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
-        .gradient-border {
-            position: relative;
-            border-bottom: 2px solid transparent;
-            background: linear-gradient(90deg, #5A3853, #6C4E66);
-            background-clip: text;
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #4CAF50, #81C784);
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .gradient-border::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #5A3853, #6C4E66);
-            transition: width 0.3s ease;
+        .hover-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .gradient-border:hover::after {
-            width: 100%;
-        }
-
-        .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        body.loading {
-            overflow: hidden;
-        }
-
-        .fade-out {
-            animation: fadeOut 0.5s ease-out forwards;
-        }
-
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        .content-fade-in {
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGBMY1BKCV"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-FGBMY1BKCV');
-    </script>
-
 </head>
-
-<body class="bg-gray-50 text-gray-800">
-    <div id="loading-screen"
-        class="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-r from-blue-800 to-indigo-900">
-        <div class="relative">
-            <!-- Loading Animation -->
-            <div class="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-            <!-- Your logo in the center -->
-            <img src="./logo.png" alt="Logo"
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 object-contain">
-        </div>
-        <p class="absolute mt-24 text-white text-lg font-medium">Won't be Long...</p>
-    </div>
-    <!-- Fixed Navigation -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center space-x-3">
-                    <div
-                        class="h-10 w-10 bg-gradient-to-r from-blue-800 to-indigo-900 rounded-lg flex items-center justify-center">
-                        <a href="https://vrajnena.tech"><img src="logo.png" alt="Vraj Nena"
-                                class="h-10 w-10 rounded-lg object-cover shadow-md transition-transform duration-300 group-hover:scale-105"></a>
-                    </div>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="gradient-border text-gray-600 py-2">About</a>
-                    <a href="#education" class="gradient-border text-gray-600 py-2">Education</a>
-                    <a href="#experience" class="gradient-border text-gray-600 py-2">Experience</a>
-                    <a href="#projects" class="gradient-border text-gray-600 py-2">Projects</a>
-                    <a href="#Hire-Me" class="gradient-border text-gray-600 py-2">Hire Me</a>
-                    <a href="#skills" class="gradient-border text-gray-600 py-2">Skills</a>
-                    <a href="#Calendly"
-                        class="px-6 py-2 bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-full hover:shadow-lg transition duration-300">Contact</a>
-                </div>
+<body class="bg-gray-900 text-white">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-opacity-80 backdrop-blur glass shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="logo.png" alt="Logo" class="w-10 h-10 rounded-full">
+                <span class="text-2xl font-bold gradient-text">Vraj Nena</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#about" class="text-gray-300 hover:text-white transition">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
+                <a href="#contact" class="px-4 py-2 bg-green-500 text-gray-900 font-medium rounded-md hover:bg-green-600 transition">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Diagonal Cut -->
-    <section class="pt-16 bg-gradient-to-r from-blue-800 to-indigo-900 text-white relative">
-        <div class="container mx-auto px-6 py-20">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="mb-8 md:mb-0 md:mr-12">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-white/20 rounded-full blur-xl"></div>
-                        <img src="vraj-nena-photo.jpg" alt="Vraj Nena"
-                            class="rounded-full w-48 h-48 object-cover border-4 border-white shadow-xl relative z-10">
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-90"></div>
+        <div class="container mx-auto px-6 z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between space-y-12 lg:space-y-0">
+                <div class="text-center lg:text-left space-y-6">
+                    <h1 class="text-5xl lg:text-7xl font-bold gradient-text">Welcome</h1>
+                    <p class="text-lg text-gray-300">I'm a passionate Software Engineer eager to contribute to exciting projects and grow professionally.</p>
+                    <div class="flex justify-center lg:justify-start space-x-4">
+                        <a href="#about" class="px-6 py-3 bg-green-500 rounded-md text-gray-900 font-medium hover:bg-green-600 transition">
+                            Learn More
+                        </a>
+                        <button
+                            onclick="showResumeModal()"
+                            class="px-6 py-3 border border-green-500 text-green-500 rounded-md hover:bg-green-500 hover:text-gray-900 transition">
+                            View Resume
+                        </button>
                     </div>
                 </div>
-                <div class="text-center md:text-left flex-grow">
-                    <h1 class="text-5xl font-bold mb-4">Vraj Nena</h1>
-                    <p class="text-2xl mb-6 opacity-90">Data Science Graduate</p>
-                    <div class="space-y-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 inline-block">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-envelope w-6"></i>
-                            <a href="mailto:vrajnena44@gmail.com" class="hover:underline">vrajnena44@gmail.com</a>
-                        </div>
-
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-map-marker-alt w-6"></i>
-                            <span>Box Hill North,VIC,3129</span>
-                        </div>
-
-                        <div class="flex space-x-6">
-                            <a href="https://linkedin.com/in/vrajnena" class="group">
-                                <div
-                                    class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-blue-600 transition duration-300">
-                                    <i class="fab fa-linkedin text-xl"></i>
-                                </div>
-                            </a>
-                            <a href="https://github.com/vnen0001" class="group">
-                                <div
-                                    class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-gray-700 transition duration-300">
-                                    <i class="fab fa-github text-xl"></i>
-                                </div>
-                            </a>
-
-                        </div>
-                    </div>
-                    <div class="mt-8 flex flex-wrap gap-4">
-                        <a href="https://drive.google.com/file/d/1z-p9LD3KutSSMTYM3QBiavUTZE6gmOBZ/view?usp=share_link"
-                            target="_blank"
-                            download="filename"
-                            class="inline-flex items-center px-6 py-3 bg-white text-blue-800 rounded-full hover:shadow-lg transition duration-300">
-                            <i class="fas fa-download mr-2"></i>Download CV
-                        </a>
-                        <a href="#Calendly"
-                            class="inline-flex items-center px-6 py-3 bg-blue-700 text-white rounded-full hover:shadow-lg transition duration-300">
-                            <i class="fas fa-calendar mr-2"></i>Schedule a Talk
-                        </a>
-                    </div>
+                <div class="relative">
+                    <img src="profile-photo.jpg" alt="Profile Photo" class="w-80 h-100 oval-full shadow-xl border-4 border-green-500 floating">
                 </div>
             </div>
+            <!-- Social Icons -->
+            <div class="flex justify-center lg:justify-start space-x-6 mt-8">
+                <a href="https://linkedin.com/in/vrajnena" target="_blank" class="text-gray-300 hover:text-green-500">
+                    <i class="fab fa-linkedin text-3xl"></i>
+                </a>
+                <a href="https://github.com/vnen0001" target="_blank" class="text-gray-300 hover:text-green-500">
+                    <i class="fab fa-github text-3xl"></i>
+                </a>
+                <a href="mailto:vrajnena44@gmail.com" target="_blank" class="text-gray-300 hover:text-green-500">
+                    <i class="fas fa-envelope text-3xl"></i>
+                </a>
+            </div>
+            <!-- Scroll Down Arrow -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+                <a href="#about" class="text-gray-300 hover:text-green-500 animate-bounce">
+                    <i class="fas fa-chevron-down text-3xl"></i>
+                </a>
+            </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gray-50 transform -skew-y-3 origin-bottom-right"></div>
     </section>
 
-    <main class="container mx-auto px-6 py-16">
-        <!-- About Section -->
-        <section id="about" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-blue-800">About Me</h2>
-            <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                <p class="text-lg leading-relaxed">
-                    Dynamic and result-driven data science graduate with a passion for extracting meaningful insights
-                    from complex datasets.
-                    Experienced in leading projects, implementing robust data pipelines, and leveraging cloud
-                    technologies to solve real-world problems.
-                    Seeking opportunities to apply my skills in machine learning, data analysis, and cloud computing to
-                    drive data-informed decision-making.
-                </p>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-blue-800">Education</h2>
-            <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                        <i class="fas fa-graduation-cap text-blue-800 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold">Monash University</h3>
-                        <p class="text-gray-600">Master of Data Science (July 2022 – Oct 2024)</p>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <h4 class="font-semibold mb-4">Key Courses:</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Statistical Data Modelling</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Python Programming</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Data Visualisation</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Data Wrangling</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Big Data Processing</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Cloud Computing</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-         <!--  Experience Section -->
-        <section id="experience" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-blue-800">Work Experience</h2>
-            <div class="grid grid-cols-1 gap-6">
-                <!--  Intern Experience -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-chart-line text-blue-800 text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold"> Technical Intern</h3>
-                                <p class="text-gray-600">MineExcellence</p>
-                            </div>
-                        </div>
-                        <div class="mt-2 md:mt-0">
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Aug 2024 - Present</span>
-                        </div>
-                    </div>
-                    <div class="ml-16">
-                        <ul class="space-y-3">
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                                <span>Assisting Development team in providing AI and Big Data technologies to be integrated in current platform following Software Development Lifecycle (SDLC).</span>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                                <span>Created 2+ functional requirements for Blast stope recovery for development and Mining Team.</span>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                                <span>Researching and presenting new ideas and innovation in mining field to Director and Managers.</span>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                                <span>Assisted Customer in understanding current platfrom through email and telephone.</span>
-                            </li>
-                        </ul>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">SQL</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"> Microsoft Office </span>
-                            
-                        </div>
-                    </div>
-                </div>
-            </section>
-        <!-- Projects Section -->
-        <section id="projects" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-blue-800">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Vital Voices Project -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-bullhorn text-blue-800"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold">Vital Voices</h3>
-                        </div>
-                        <p class="mb-4 text-gray-600">Data-driven analysis of mental health trends and suicide ideation,
-                            focusing on men's mental health and gambling.</p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Led university team with Agile Methods</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Implemented data pipeline using CRON</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Azure cloud infrastructure</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Azure AI speech services (Text-to-Speech) </span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Used Redis with Celery for in-memort Caching and to serve Django Api calls</span>
-                            </li>
-
-                        </ul>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">SQL</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Azure</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">API</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">CRON</span>
-
-                        </div>
-                        <a href="https://github.com/vnen0001/celery-reds/tree/development" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition duration-300">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            View Project on Github 
-                        </a>
-                    </div>
-                </div>
-
-
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-cube text-blue-800"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold">Object Detection on Kubernetes</h3>
-                        </div>
-                        <p class="mb-4 text-gray-600">Scalable platform for object detection using advanced machine
-                            learning algorithms on Kubernetes to idnetify objects on uploaded images.</p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Built scalable Kubernetes cluster architecture</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Implemented Pre-trained YOLO model deployment</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Developed React frontend with Docker</span>
-                            </li>
-
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Load tested with 10+ concurrent users</span>
-                            </li>
-                        </ul>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Kubernetes</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Docker</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Oracle Cloud</span>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Traffic Congestion Analysis Project -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-traffic-light text-blue-800"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold">Traffic Congestion Analysis</h3>
-                        </div>
-                        <p class="mb-4 text-gray-600">Comprehensive analysis of Melbourne's traffic patterns and
-                            congestion hotspots using VicRoads API data, enabling data-driven traffic management
-                            solutions.</p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Developed real-time Tableau dashboards</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Used VicRoads Data API </span>
-                            </li>
-
-                            <li class="flex items-center space-x-2">
-                                <i class="fas fa-check text-green-500"></i>
-                                <span>Identified major congestion hotspots in Melbourne</span>
-                            </li>
-                        </ul>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">SQL</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Tableau</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Azure</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">GIS</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Statistics</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="Hire-Me"  class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Section Header -->
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
-                        Why Hire Me?
-                    </h2>
-                    <p class="mt-4 text-xl text-gray-600">
-                        Here's what makes me a strong candidate for your team
-                    </p>
-                </div>
-
-                <!-- Reasons Grid -->
-                <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    <!-- Technical Expertise -->
-                    <div
-                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-laptop-code text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900">
-                                Technical Expertise
-                            </h3>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">
-                            Strong foundation in data science with hands-on experience in Python, R, and SQL. Proven
-                            ability to work with cloud platforms and modern data engineering tools.
-                        </p>
-                        <div
-                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
-                        </div>
-                    </div>
-
-                    <!-- Project Leadership -->
-                    <div
-                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-users text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900">
-                                Project Leadership
-                            </h3>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">
-                            Successfully led multiple university projects using Agile methodologies. Demonstrated
-                            ability to coordinate team efforts and deliver high-quality results.
-                        </p>
-                        <div
-                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
-                        </div>
-                    </div>
-
-                    <!-- Problem-Solving Skills -->
-                    <div
-                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-lightbulb text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900">
-                                Problem-Solving Skills
-                            </h3>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">
-                            Strong analytical mindset with experience in implementing complex solutions, from traffic
-                            analysis to scalable object detection systems.
-                        </p>
-                        <div
-                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
-                        </div>
-                    </div>
-
-                    <!-- Continuous Learning -->
-                    <div
-                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900">
-                                Continuous Learning
-                            </h3>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">
-                            Consistently pursuing professional development through certifications in Databricks, Azure
-                            AI, and Google Cloud.
-                        </p>
-                        <div
-                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
-                        </div>
-                    </div>
-
-                    <!-- Data Pipeline Expertise -->
-                    <div
-                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-database text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900">
-                                Data Pipeline Expertise
-                            </h3>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">
-                            Experience in designing and implementing end-to-end data pipelines using CRON jobs, Redis,
-                            and cloud infrastructure.
-                        </p>
-                        <div
-                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
-                        </div>
-                    </div>
-
-                    <!-- Cloud Proficiency -->
-                    <div
-                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-cloud text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900">
-                                Cloud Proficiency
-                            </h3>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">
-                            Hands-on experience with Azure and Oracle Cloud, including deployment of web applications
-                            and managing cloud infrastructure.
-                        </p>
-                        <div
-                            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-16 text-center">
-                    <a href="#Calendly" class="group relative inline-flex items-center justify-center">
-                        <!-- Primary Button -->
-                        <button class="relative px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-lg font-semibold rounded-full transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
-                            <span class="flex items-center">
-                                <span>Hire Me</span>
-                                <i class="fas fa-arrow-down ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
-                            </span>
-                        </button>
-                        
-                        <!-- Animated Background Effect -->
-                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300 -z-10"></div>
-                    </a>
-                    
-                    <!-- Additional Text -->
-                    <p class="mt-4 text-gray-600">Let's discuss how I can contribute to your team</p>
-                </div>
-            </div>
-        </section>
-        <!-- Skills Section -->
-        <section id="skills" class="mb-20">
-            <!-- Content remains the same but with enhanced styling -->
-            <h2 class="text-3xl font-bold mb-6 text-blue-800">Skills & Certifications</h2>
-            <div class="bg-white shadow-lg rounded-lg p-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Technical Skills</h3>
-                        <ul class="space-y-2">
-                            <li><i class="fas fa-code text-blue-500 mr-2"></i>Python, R, SQL</li>
-                            <li><i class="fas fa-database text-blue-500 mr-2"></i>Azure Data Factory, Apache Spark</li>
-                            <li><i class="fas fa-chart-bar text-blue-500 mr-2"></i>Tableau, Power BI</li>
-                            <li><i class="fas fa-cloud text-blue-500 mr-2"></i>Cloud Computing (Azure)</li>
-                            <li><i class="fas fa-spider text-blue-500 mr-2"></i>Web Scraping</li>
-                            <li><i class="fab fa-docker text-blue-500 mr-2"></i>Docker Basics</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Certifications</h3>
-                        <ul class="space-y-2">
-                            <li>
-                                <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://credentials.databricks.com/c4823983-ee55-42df-9380-a7f1a1772b9c#gs.f48ve4"
-                                    target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                                    Databricks DataLake House Fundamentals
-                                </a>
-                            </li>
-                            <li>
-                                <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://www.hackerrank.com/certificates/ed3753fac189" target="_blank"
-                                    rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                                    HackerRank SQL (Basic) Certificate
-                                </a>
-                            </li>
-                            <li>
-                                <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://www.credly.com/badges/439e7b1b-5716-4af9-8ee0-390bb77f51cb/public_ur"
-                                    target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                                    Microsoft Certified: Azure AI Fundamentals
-                                </a>
-                            </li>
-                            <li>
-                                <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/XCE2MWA3YUBF"
-                                    target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                                    Google Cloud Specialization
-                                </a>
-                            </li>
-                            <li>
-                                <i class="fas fa-certificate text-yellow-500 mr-2 winding-icon"></i>
-                                <span class="text-gray-600">Big Data Engineering (ongoing)</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Contact Section -->
-        <section id="Calendly" class="mb-20">
-            <h2 class="text-3xl font-bold mb-6 text-blue-800">Hire me to Work</h2>
-            <div>
-
-
-                <div class="calendly-inline-widget" data-url="https://calendly.com/vrajnena44/30min"
-                    style="min-width:320px;height:630px;"></div>
-
-            </div>
-        </section>
-    </main>
-
-
-    <!-- Back to Top Button -->
-    <button id="back-to-top"
-        class="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-blue-800 to-indigo-900 text-white rounded-full shadow-lg hover:shadow-xl transition duration-300 hidden">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <section id="about" class="py-20 bg-gray-800">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 mb-4 md:mb-0">&copy; 2024 Vraj Nena. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="https://linkedin.com/in/vrajnena" class="group">
-                        <div
-                            class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-blue-600 transition duration-300">
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </div>
-                    </a>
-                    <a href="https://github.com/vnen0001" class="group">
-                        <div
-                            class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform group-hover:rotate-6 group-hover:bg-gray-700 transition duration-300">
-                            <i class="fab fa-github text-xl"></i>
-                        </div>
-                    </a>
-
+            <h2 class="text-4xl font-bold text-center gradient-text mb-12">About Me</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <p class="text-gray-300 leading-relaxed">
+                        I'm a software engineer passionate about building efficient and scalable applications. I specialize in distributed systems, RESTful APIs, and integrating AI technologies with cloud platforms. I strive to create impactful solutions while continuously learning and growing.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed">
+                        With experience in Agile methodologies and a strong foundation in domain modeling, I have contributed to innovative projects in mental health analytics, object detection, and traffic pattern analysis, leveraging my expertise in Python, Django, and cloud platforms.
+                    </p>
+                    <button
+                        onclick="showResumeModal()"
+                        class="px-6 py-3 bg-green-500 rounded-md text-gray-900 font-medium hover:bg-green-600 transition">
+                        View Resume
+                    </button>
+                </div>
+                <div>
+                    <!-- Updated Spinner Animation -->
+                    <lottie-player
+                        src="https://assets10.lottiefiles.com/private_files/lf30_wqypnpu5.json"
+                        background="transparent"
+                        speed="1"
+                        loop
+                        autoplay
+                        style="width: 300px; height: 300px; margin: 0 auto;">
+                    </lottie-player>
                 </div>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        document.body.classList.add('loading');
-
-        // Function to hide loading screen
-        function hideLoadingScreen() {
-            const loadingScreen = document.getElementById('loading-screen');
-            const mainContent = document.querySelector('main');
-
-            // Add fade out animation to loading screen
-            loadingScreen.classList.add('fade-out');
-
-            // Add fade in animation to main content
-            mainContent.classList.add('content-fade-in');
-
-            // Remove loading class from body
-            document.body.classList.remove('loading');
-
-            // Remove loading screen after animation
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
+    <!-- Skills Section -->
+    <!-- <section id="skills" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center gradient-text mb-12">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="hover-card p-6 rounded-lg glass text-center">
+                    <i class="fas fa-code text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-2">Languages</h3>
+                    <p class="text-gray-300">Python, JavaScript, SQL, R</p>
+                </div>
+                <div class="hover-card p-6 rounded-lg glass text-center">
+                    <i class="fas fa-tools text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-2">Frameworks</h3>
+                    <p class="text-gray-300">Django, FastAPI, React</p>
+                </div>
+                <div class="hover-card p-6 rounded-lg glass text-center">
+                    <i class="fas fa-cloud text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-2">Cloud</h3>
+                    <p class="text-gray-300">Azure, AWS, GCP</p>
+                </div>
+                <div class="hover-card p-6 rounded-lg glass text-center">
+                    <i class="fas fa-database text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-2">Tools</h3>
+                    <p class="text-gray-300">Docker, Kubernetes, Git, Terraform , Ansible</p>
+                </div>
+                <div class="hover-card p-6 rounded-lg glass text-center">
+                    <i class="fas fa-chart-bar text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-2">Visualization</h3>
+                    <p class="text-gray-300">Power BI, Tableau</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+    </section> -->
+    <style>
+        .skill-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 2rem;
+          padding: 2rem;
         }
-
-        // Listen for when the page is fully loaded
-        window.addEventListener('load', () => {
-            // Add a small delay to ensure smooth animation
-            setTimeout(hideLoadingScreen, 500);
-        });
-
-        // Fallback: Hide loading screen after 5 seconds even if page hasn't fully loaded
-        setTimeout(hideLoadingScreen, 5000);
-
-        // Handle errors during loading
-        window.addEventListener('error', () => {
-            hideLoadingScreen();
-        });
-        // Mobile Menu Functionality
-        const handleMobileMenu = () => {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu?.classList.toggle('hidden');
-        };
-
-        // Intersection Observer for Section Highlighting
-        const observerOptions = {
-            root: null,
-            rootMargin: '-50% 0px',
-            threshold: 0
-        };
-
-        const observerCallback = (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    document.querySelectorAll('.gradient-border').forEach(link => {
-                        link.classList.remove('text-blue-800');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('text-blue-800');
-                        }
-                    });
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const target = document.querySelector(targetId);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Back to Top Button
-        const backToTop = document.getElementById('back-to-top');
-        const handleScroll = () => {
-            if (window.scrollY > 500) {
-                backToTop.classList.remove('hidden');
-                backToTop.classList.add('flex');
+        
+        .skill-card {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 16px;
+          padding: 2rem;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .skill-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .skill-icon {
+          width: 48px;
+          height: 48px;
+          margin-bottom: 1rem;
+        }
+        
+        .skill-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-top: 1rem;
+        }
+        
+        .skill-tag {
+          background: rgba(255, 255, 255, 0.1);
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+      </style>
+    <section id="skills" class="bg-gray-900 text-white py-20">
+        <div class="container mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center mb-12">
+            Technical Skills
+          </h2>
+          
+          <div class="skill-grid">
+            <!-- Programming Languages -->
+            <div class="skill-card">
+              <i class="fas fa-code text-4xl mb-4 text-blue-400"></i>
+              <h3 class="text-xl font-semibold mb-4">Programming Languages</h3>
+              <div class="skill-list">
+                <span class="skill-tag">
+                  <i class="fab fa-python text-yellow-400"></i>
+                  Python
+                </span>
+                <span class="skill-tag">
+                  <i class="fab fa-js text-yellow-300"></i>
+                  JavaScript
+                </span>
+                <span class="skill-tag">
+                  <i class="fas fa-database text-blue-300"></i>
+                  SQL
+                </span>
+                <span class="skill-tag">
+                  <i class="fas fa-chart-line text-blue-400"></i>
+                  R
+                </span>
+              </div>
+            </div>
+    
+            <!-- Frameworks -->
+            <div class="skill-card">
+              <i class="fas fa-layer-group text-4xl mb-4 text-green-400"></i>
+              <h3 class="text-xl font-semibold mb-4">Frameworks</h3>
+              <div class="skill-list">
+                <span class="skill-tag">
+                  <i class="fab fa-python text-green-500"></i>
+                  Django
+                </span>
+                <span class="skill-tag">
+                  <i class="fas fa-bolt text-yellow-400"></i>
+                  FastAPI
+                </span>
+                <span class="skill-tag">
+                  <i class="fab fa-react text-blue-400"></i>
+                  React
+                </span>
+              </div>
+            </div>
+    
+            <!-- Cloud Services -->
+            <div class="skill-card">
+              <i class="fas fa-cloud text-4xl mb-4 text-purple-400"></i>
+              <h3 class="text-xl font-semibold mb-4">Cloud Platforms</h3>
+              <div class="skill-list">
+                <span class="skill-tag">
+                  <i class="fab fa-microsoft text-blue-400"></i>
+                  Azure
+                </span>
+                <span class="skill-tag">
+                  <i class="fab fa-aws text-orange-400"></i>
+                  AWS
+                </span>
+                <span class="skill-tag">
+                  <i class="fab fa-google text-red-400"></i>
+                  GCP
+                </span>
+              </div>
+            </div>
+    
+            <!-- DevOps Tools -->
+            <div class="skill-card">
+              <i class="fas fa-tools text-4xl mb-4 text-red-400"></i>
+              <h3 class="text-xl font-semibold mb-4">DevOps Tools</h3>
+              <div class="skill-list">
+                <span class="skill-tag">
+                  <i class="fab fa-docker text-blue-400"></i>
+                  Docker
+                </span>
+                <span class="skill-tag">
+                  <i class="fas fa-dharmachakra text-blue-500"></i>
+                  Kubernetes
+                </span>
+                <span class="skill-tag">
+                  <i class="fab fa-git-alt text-orange-500"></i>
+                  Git
+                </span>
+                <span class="skill-tag">
+                  <i class="fas fa-cube text-purple-400"></i>
+                  Terraform
+                </span>
+              </div>
+            </div>
+    
+            <!-- Data Visualization -->
+            <div class="skill-card">
+              <i class="fas fa-chart-bar text-4xl mb-4 text-yellow-400"></i>
+              <h3 class="text-xl font-semibold mb-4">Data Visualization</h3>
+              <div class="skill-list">
+                <span class="skill-tag">
+                  <i class="fas fa-chart-pie text-yellow-500"></i>
+                  Power BI
+                </span>
+                <span class="skill-tag">
+                  <i class="fas fa-chart-area text-blue-400"></i>
+                  Tableau
+                </span>
+              </div>
+            </div>
+    
+            <!-- Big Data -->
+            <div class="skill-card">
+              <i class="fas fa-database text-4xl mb-4 text-orange-400"></i>
+              <h3 class="text-xl font-semibold mb-4">Big Data Technologies</h3>
+              <div class="skill-list">
+                <span class="skill-tag">
+                  <i class="fas fa-stream text-red-400"></i>
+                  Apache Kafka
+                </span>
+                <span class="skill-tag">
+                  <i class="fas fa-fire text-orange-500"></i>
+                  Apache Spark
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center gradient-text mb-12">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project: Vital Voices -->
+                <div class="bg-gray-700 rounded-lg p-6 hover-card">
+                    <h3 class="text-2xl font-semibold mb-4">Vital Voices of Change</h3>
+                    <p class="text-gray-400 mb-4">
+                        Developed a fault-tolerant system to analyze mental health trends focusing on men's mental health and gambling. Designed a data warehouse with ETL pipelines, integrated a 3D chatbot using Django and Azure AI Speech API, and implemented Redis with Celery workers for asynchronous tasks.
+                    </p>
+                    <a href="https://github.com/vnen0001/celery-reds/tree/development" class="text-green-500 hover:text-green-400">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <!-- Project: Object Detection -->
+                <div class="bg-gray-700 rounded-lg p-6 hover-card">
+                    <h3 class="text-2xl font-semibold mb-4">Object Detection on Kubernetes</h3>
+                    <p class="text-gray-400 mb-4">
+                        Built a scalable platform for object detection using machine learning models deployed on Kubernetes. Used Terraform for VM configuration and React for the frontend, demonstrating containerization and orchestration expertise.
+                    </p>
+                    <a href="#" class="text-green-500 hover:text-green-400">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <!-- Project: Traffic Analysis -->
+                <div class="bg-gray-700 rounded-lg p-6 hover-card">
+                    <h3 class="text-2xl font-semibold mb-4">Traffic Congestion Analysis</h3>
+                    <p class="text-gray-400 mb-4">
+                        Analyzed Melbourne's traffic patterns using VicRoads API. Created real-time and historical dashboards in Tableau and conducted data preprocessing with Python to manage large-scale traffic datasets.
+                    </p>
+                    <a href="#" class="text-green-500 hover:text-green-400">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="resumeModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white w-11/12 max-w-3xl p-6 rounded-lg">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold">Resume</h2>
+                <button
+                    onclick="closeResumeModal()"
+                    class="text-gray-600 hover:text-gray-800 text-2xl font-bold">
+                    &times;
+                </button>
+            </div>
+            <iframe
+                id="resumeIframe"
+                src=""
+                class="w-full h-96 mt-4 border rounded-lg"
+                frameborder="0">
+            </iframe>
+            <div class="text-right mt-4">
+                <a href="https://drive.google.com/file/d/YOUR_GOOGLE_DRIVE_FILE_ID/view?usp=share_link"
+                   target="_blank"
+                   class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+                    Download Resume
+                </a>
+            </div>
+        </div>
+    </div>
+    <button id="scrollToTop" class="fixed bottom-10 right-10 hidden p-3 bg-green-500 rounded-full text-white shadow-lg hover:bg-green-600">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        // Show/Hide Scroll to Top Button
+        window.addEventListener('scroll', () => {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 200) {
+                scrollToTopBtn.classList.remove('hidden');
             } else {
-                backToTop.classList.add('hidden');
-                backToTop.classList.remove('flex');
+                scrollToTopBtn.classList.add('hidden');
             }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         });
-
-        // Card Animations on Scroll
-        const cards = document.querySelectorAll('.card-hover');
-        const cardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.5s ease-out';
-            cardObserver.observe(card);
-        });
-
-        // Skills Progress Animation
-        const skills = document.querySelectorAll('.skill-progress');
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progress = entry.target;
-                    const percentage = progress.getAttribute('data-percentage');
-                    progress.style.width = percentage + '%';
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        skills.forEach(skill => {
-            skillObserver.observe(skill);
-        });
-
-        // Certification Badge Animation
-        document.querySelectorAll('.winding-icon').forEach(icon => {
-            icon.style.transition = 'transform 0.3s ease';
-            icon.parentElement.addEventListener('mouseenter', () => {
-                icon.style.transform = 'rotate(360deg)';
-            });
-            icon.parentElement.addEventListener('mouseleave', () => {
-                icon.style.transform = 'rotate(0deg)';
-            });
+    
+        // Scroll to Top
+        document.getElementById('scrollToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 
-    <!-- Calendly Script -->
-    <!-- <script>
-        Calendly.initInlineWidget({
-            url: 'https://calendly.com/vrajnena44/30min',
-            parentElement: document.querySelector('.calendly-inline-widget'),
-            prefill: {},
-            utm: {}
-        });
-    </script> -->
-</body>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold gradient-text mb-12">Let's Connect</h2>
+            <p class="text-gray-300 mb-8">Interested in collaborating or hiring me? Get in touch below.</p>
+            <a href="mailto:example@gmail.com" class="px-8 py-3 bg-green-500 text-gray-900 rounded-md hover:bg-green-600 transition">
+                Contact Me
+            </a>
+        </div>
+    </section>
 
+    <footer class="py-8 bg-gray-800 text-center text-gray-500">
+        <p>&copy; 2024 Vraj Nena. All rights reserved.</p>
+    </footer>
+    <script>
+        // Functions to handle resume modal
+        function showResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            const iframe = document.getElementById('resumeIframe');
+            iframe.src = 'https://drive.google.com/file/d/1XHqrvyOALI0-W-J__V5U4RbMKY5QaHLi/preview';
+            modal.classList.remove('hidden');
+        }
+    
+        function closeResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            modal.classList.add('hidden');
+            const iframe = document.getElementById('resumeIframe');
+            iframe.src = ''; // Clear iframe source
+        }
+    </script>
+      <!-- Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGBMY1BKCV"></script>
+      <script>
+          const isDevEnvironment = () => {
+              const hostname = window.location.hostname;
+              return hostname === "localhost" 
+                     || hostname === "127.0.0.1"
+                     || hostname.includes(".local")
+                     || hostname.includes(".test");
+          };
+          
+          if (isDevEnvironment()) {
+              window['gtag-disable-G-FGBMY1BKCV'] = true;
+          }
+          
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', 'G-FGBMY1BKCV');
+          </script>
+</body>
 </html>
