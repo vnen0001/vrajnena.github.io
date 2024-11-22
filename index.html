@@ -3,6 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Basic favicon -->
+      <link rel="icon" href="/logo.png" type="image/png">
+    
+      <!-- iOS devices -->
+      <link rel="apple-touch-icon" href="/logo.png">
+      
+      <!-- Modern browsers - helps with different sizes -->
+      <meta name="theme-color" content="#4CAF50">
+      
+      <!-- Windows tile -->
+      <meta name="msapplication-TileImage" content="/logo.png">
+      <meta name="msapplication-TileColor" content="#4CAF50">
+      
+      <!-- PWA support -->
+      <link rel="manifest" href="/site.webmanifest">
+      <script>
+      const sharp = require('sharp');
+const fs = require('fs').promises;
+
+async function generateFavicons() {
+    const sizes = [16, 32, 64, 192, 512];
+    const inputFile = 'logo.png';
+    
+    try {
+        for (const size of sizes) {
+            await sharp(inputFile)
+                .resize(size, size, {
+                    fit: 'contain',
+                    background: { r: 0, g: 0, b: 0, alpha: 0 }
+                })
+                .png()
+                .toFile(`logo-${size}x${size}.png`);
+            
+            console.log(`Generated ${size}x${size} favicon`);
+        }
+    } catch (error) {
+        console.error('Error generating favicons:', error);
+    }
+}
+
+generateFavicons();
+</script>
     <title>Vraj Nena Portfolio</title>
 
     <!-- Tailwind CSS -->
@@ -38,6 +80,68 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+          /* Base styles for social icons */
+    .social-icon {
+        @apply text-gray-300 transition-all duration-300 ease-in-out transform;
+    }
+
+    /* Hover animations - different for each icon */
+    .social-icon.linkedin:hover {
+        @apply text-blue-500;
+        animation: bounce-rotate 0.6s ease-in-out;
+    }
+
+    .social-icon.github:hover {
+        @apply text-purple-500;
+        animation: bounce-up 0.6s ease-in-out;
+    }
+
+    .social-icon.email:hover {
+        @apply text-red-500;
+        animation: shake 0.6s ease-in-out;
+    }
+
+    /* Animation keyframes */
+    @keyframes bounce-rotate {
+        0%, 100% {
+            transform: scale(1) rotate(0deg);
+        }
+        50% {
+            transform: scale(1.2) rotate(10deg);
+        }
+    }
+
+    @keyframes bounce-up {
+        0%, 100% {
+            transform: scale(1) translateY(0);
+        }
+        50% {
+            transform: scale(1.2) translateY(-5px);
+        }
+    }
+
+    @keyframes shake {
+        0%, 100% {
+            transform: scale(1) rotate(0deg);
+        }
+        20% {
+            transform: scale(1.1) rotate(-10deg);
+        }
+        40% {
+            transform: scale(1.1) rotate(10deg);
+        }
+        60% {
+            transform: scale(1.1) rotate(-10deg);
+        }
+        80% {
+            transform: scale(1.1) rotate(10deg);
+        }
+    }
+
+    /* Optional glow effect */
+    .social-icon:hover {
+        filter: drop-shadow(0 0 8px currentColor);
+    }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -50,6 +154,7 @@
             </div>
             <div class="hidden md:flex items-center space-x-6">
                 <a href="#about" class="text-gray-300 hover:text-white transition">About</a>
+                <a href="#experience" class="text-gray-300 hover:text-white transition">Experience</a>
                 <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
                 <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
                 <a href="#contact" class="px-4 py-2 bg-green-500 text-gray-900 font-medium rounded-md hover:bg-green-600 transition">Contact</a>
@@ -64,7 +169,11 @@
             <div class="flex flex-col lg:flex-row items-center justify-between space-y-12 lg:space-y-0">
                 <div class="text-center lg:text-left space-y-6">
                     <h1 class="text-5xl lg:text-7xl font-bold gradient-text">Welcome</h1>
-                    <p class="text-lg text-gray-300">I'm a passionate Software Engineer eager to contribute to exciting projects and grow professionally.</p>
+                    <p class="text-gray-300 leading-relaxed text-justify">
+                     <li>I'm a software engineer passionate about building efficient and scalable applications. </li> 
+                     <li>I specialize in distributed systems, RESTful APIs, and integrating AI technologies with cloud platforms.I strive to create impactful solutions while continuously learning and growing. </li> 
+                      
+                  </p>
                     <div class="flex justify-center lg:justify-start space-x-4">
                         <a href="#about" class="px-6 py-3 bg-green-500 rounded-md text-gray-900 font-medium hover:bg-green-600 transition">
                             Learn More
@@ -76,25 +185,57 @@
                         </button>
                     </div>
                 </div>
-                <div class="relative">
-                    <img src="profile-photo.jpg" alt="Profile Photo" class="w-80 h-100 oval-full shadow-xl border-4 border-green-500 floating">
-                </div>
+                <div class="protect-content w-80 h-100">
+                  <div class="profile-photo protect-image">
+                      <img src="profile-photo.jpg" alt="Vraj Nena" 
+                           onload="this.src = addNoiseOverlay(this)">
+                      <div class="watermark">Vraj Nena © 2024</div>
+                  </div>
+              </div>
             </div>
             <!-- Social Icons -->
-            <div class="flex justify-center lg:justify-start space-x-6 mt-8">
-                <a href="https://linkedin.com/in/vrajnena" target="_blank" class="text-gray-300 hover:text-green-500">
-                    <i class="fab fa-linkedin text-3xl"></i>
-                </a>
-                <a href="https://github.com/vnen0001" target="_blank" class="text-gray-300 hover:text-green-500">
-                    <i class="fab fa-github text-3xl"></i>
-                </a>
-                <a href="mailto:vrajnena44@gmail.com" target="_blank" class="text-gray-300 hover:text-green-500">
-                    <i class="fas fa-envelope text-3xl"></i>
-                </a>
-            </div>
+            <div class="flex justify-center lg:justify-start space-x-8 mt-8">
+              <a href="https://linkedin.com/in/vrajnena" 
+                 target="_blank" 
+                 class="social-icon linkedin group relative"
+                 aria-label="LinkedIn Profile">
+                  <i class="fab fa-linkedin text-3xl"></i>
+                  <!-- Tooltip -->
+                  <span class="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-gray-800 text-white px-2 py-1 rounded text-sm
+                               opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      LinkedIn
+                  </span>
+              </a>
+              
+              <a href="https://github.com/vnen0001" 
+                 target="_blank" 
+                 class="social-icon github group relative"
+                 aria-label="GitHub Profile">
+                  <i class="fab fa-github text-3xl"></i>
+                  <!-- Tooltip -->
+                  <span class="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-gray-800 text-white px-2 py-1 rounded text-sm
+                               opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      GitHub
+                  </span>
+              </a>
+              
+              <a href="mailto:vrajnena44@gmail.com" 
+                 class="social-icon email group relative"
+                 aria-label="Email Contact">
+                  <i class="fas fa-envelope text-3xl"></i>
+                  <!-- Tooltip -->
+                  <span class="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-gray-800 text-white px-2 py-1 rounded text-sm
+                               opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      Email
+                  </span>
+              </a>
+          </div>
             <!-- Scroll Down Arrow -->
             <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-                <a href="#about" class="text-gray-300 hover:text-green-500 animate-bounce">
+                <a href="#about" class="text-gray-300 hover:text-green-500 animate">
                     <i class="fas fa-chevron-down text-3xl"></i>
                 </a>
             </div>
@@ -106,10 +247,10 @@
             <h2 class="text-4xl font-bold text-center gradient-text mb-12">About Me</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div class="space-y-6">
-                    <p class="text-gray-300 leading-relaxed">
+                    <p class="text-gray-300 leading-relaxed text-justify">
                         I'm a software engineer passionate about building efficient and scalable applications. I specialize in distributed systems, RESTful APIs, and integrating AI technologies with cloud platforms. I strive to create impactful solutions while continuously learning and growing.
                     </p>
-                    <p class="text-gray-300 leading-relaxed">
+                    <p class="text-gray-300 leading-relaxed text-justify">
                         With experience in Agile methodologies and a strong foundation in domain modeling, I have contributed to innovative projects in mental health analytics, object detection, and traffic pattern analysis, leveraging my expertise in Python, Django, and cloud platforms.
                     </p>
                     <button
@@ -132,6 +273,47 @@
             </div>
         </div>
     </section>
+    <section id="experience" class="py-20 bg-gray-800">
+      <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold text-center gradient-text mb-12">Professional Experience</h2>
+          <div class="space-y-8">
+              <!-- Experience Card Template -->
+              <div class="bg-gray-700 rounded-lg p-6 hover-card">
+                  <div class="flex justify-between items-start mb-4">
+                      <div>
+                          <h3 class="text-2xl font-semibold">Software Engineer</h3>
+                          <p class="text-green-500">MineExcllence</p>
+                      </div>
+                      <span class="text-gray-400">Aug 2024 - Present</span>
+                  </div>
+                  <ul class="list-disc list-inside text-gray-300 space-y-2">
+                      <li>Assisting Development team in providing AI and Big Data technologies to be integrated in current platform following
+                      Software Development Lifecycle (SDLC).</li>
+              
+                      <li>Created a REST-ful API design by writing code using Fast-API to handle large point cloud files processing and used
+                        Potree library along with React app to visualize and give insights on Stopes.</li>
+
+                      <li>Conducted comprehensive research by reviewing industry papers and technical articles by ensuring client-focused
+                        approach to use knowledge from papers.Followed agile methodologies by collaborative working across cross-cultural
+                        team to build Web Products.</li>
+                        <li>Created 2+ functional requirements for Blast stope recovery for development and Mining Team meeting software
+                          engineering best practices.</li>
+                  </ul>
+                  <div class="mt-4">
+                      <p class="text-gray-400 font-semibold">Technologies:</p>
+                      <div class="flex flex-wrap gap-2 mt-2">
+                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Python</span>
+                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Fast-API</span>
+                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">JavaScript</span>
+                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Drone Data Processing</span>
+                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Potree</span>
+                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">React</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
 
     <!-- Skills Section -->
     <!-- <section id="skills" class="py-20 bg-gray-900">
@@ -212,7 +394,202 @@
           align-items: center;
           gap: 0.5rem;
         }
-      </style>
+     
+    /* Disable text selection */
+    .protect-content {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Protect images */
+    .protect-image {
+        pointer-events: none;
+        -webkit-touch-callout: none;
+        position: relative;
+    }
+
+    /* Invisible overlay to prevent right-click */
+    .protect-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        z-index: 1;
+    }
+
+    /* Watermark style */
+    .watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.1);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 2;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Blur protection on hover/focus */
+    .protect-image img {
+        filter: blur(0px);
+        transition: filter 0.3s ease;
+    }
+
+    .protect-image:hover img,
+    .protect-image:focus img {
+        filter: blur(5px);
+    }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Disable right-click on the entire page
+      document.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+          showWarning();
+      });
+
+      // Disable keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+          // Prevent Print Screen
+          if (e.key === 'PrintScreen') {
+              e.preventDefault();
+              showWarning();
+          }
+
+          // Prevent Ctrl + Shift + I (Developer Tools)
+          if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+              e.preventDefault();
+              showWarning();
+          }
+
+          // Prevent Ctrl + S (Save)
+          if (e.ctrlKey && e.key === 's') {
+              e.preventDefault();
+              showWarning();
+          }
+
+          // Prevent Ctrl + C (Copy)
+          if (e.ctrlKey && e.key === 'c') {
+              const selection = window.getSelection();
+              if (selection.toString().length > 0) {
+                  e.preventDefault();
+                  showWarning();
+              }
+          }
+      });
+
+      // Disable drag and drop
+      document.addEventListener('dragstart', (e) => {
+          if (e.target.tagName === 'IMG') {
+              e.preventDefault();
+          }
+      });
+
+      // Monitor for screenshots (limited support)
+      if ('mediaDevices' in navigator && 'getDisplayMedia' in navigator.mediaDevices) {
+          navigator.mediaDevices.getDisplayMedia = async () => {
+              showWarning();
+              throw new Error('Screenshot disabled');
+          };
+      }
+
+      // Show warning message
+      function showWarning() {
+          const warningDiv = document.createElement('div');
+          warningDiv.style.cssText = `
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background: rgba(0, 0, 0, 0.9);
+              color: white;
+              padding: 20px;
+              border-radius: 10px;
+              z-index: 10000;
+              text-align: center;
+              animation: fadeIn 0.3s ease;
+          `;
+          warningDiv.innerHTML = `
+              <h3 style="color: #FF4444; margin-bottom: 10px;">⚠️ Content Protected</h3>
+              <p>This content is protected. Please contact for permissions.</p>
+          `;
+
+          document.body.appendChild(warningDiv);
+
+          setTimeout(() => {
+              warningDiv.style.animation = 'fadeOut 0.3s ease';
+              setTimeout(() => {
+                  document.body.removeChild(warningDiv);
+              }, 300);
+          }, 2000);
+      }
+
+      // Add protection to images
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+          const container = document.createElement('div');
+          container.className = 'protect-image';
+          img.parentNode.insertBefore(container, img);
+          container.appendChild(img);
+          
+          // Add watermark
+          const watermark = document.createElement('div');
+          watermark.className = 'watermark';
+          watermark.textContent = 'Vraj Nena © 2024';
+          container.appendChild(watermark);
+      });
+
+      // Disable developer tools (basic protection)
+      function disableDevTools() {
+          if (window.devtools.isOpen) {
+              window.location.href = "about:blank";
+          }
+      }
+      setInterval(disableDevTools, 1000);
+
+      // Disable source view
+      document.onkeypress = function (event) {
+          event = (event || window.event);
+          if (event.keyCode == 123) {
+              return false;
+          }
+      }
+  });
+
+  // Add dynamic noise overlay to images
+  function addNoiseOverlay(image) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = image.width;
+      canvas.height = image.height;
+      
+      // Draw image
+      ctx.drawImage(image, 0, 0);
+      
+      // Add subtle noise
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      
+      for (let i = 0; i < data.length; i += 4) {
+          const noise = Math.random() * 10 - 5;
+          data[i] += noise;     // Red
+          data[i + 1] += noise; // Green
+          data[i + 2] += noise; // Blue
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
+      return canvas.toDataURL();
+  }
+</script>
+
     <section id="skills" class="bg-gray-900 text-white py-20">
         <div class="container mx-auto px-4">
           <h2 class="text-4xl font-bold text-center mb-12">
@@ -350,7 +727,7 @@
                 <!-- Project: Vital Voices -->
                 <div class="bg-gray-700 rounded-lg p-6 hover-card">
                     <h3 class="text-2xl font-semibold mb-4">Vital Voices of Change</h3>
-                    <p class="text-gray-400 mb-4">
+                    <p class="text-gray-400 mb-4 text-justify">
                         Developed a fault-tolerant system to analyze mental health trends focusing on men's mental health and gambling. Designed a data warehouse with ETL pipelines, integrated a 3D chatbot using Django and Azure AI Speech API, and implemented Redis with Celery workers for asynchronous tasks.
                     </p>
                     <a href="https://github.com/vnen0001/celery-reds/tree/development" class="text-green-500 hover:text-green-400">
@@ -360,7 +737,7 @@
                 <!-- Project: Object Detection -->
                 <div class="bg-gray-700 rounded-lg p-6 hover-card">
                     <h3 class="text-2xl font-semibold mb-4">Object Detection on Kubernetes</h3>
-                    <p class="text-gray-400 mb-4">
+                    <p class="text-gray-400 mb-4 text-justify">
                         Built a scalable platform for object detection using machine learning models deployed on Kubernetes. Used Terraform for VM configuration and React for the frontend, demonstrating containerization and orchestration expertise.
                     </p>
                     <a href="#" class="text-green-500 hover:text-green-400">
@@ -370,7 +747,7 @@
                 <!-- Project: Traffic Analysis -->
                 <div class="bg-gray-700 rounded-lg p-6 hover-card">
                     <h3 class="text-2xl font-semibold mb-4">Traffic Congestion Analysis</h3>
-                    <p class="text-gray-400 mb-4">
+                    <p class="text-gray-400 mb-4 text-justify">
                         Analyzed Melbourne's traffic patterns using VicRoads API. Created real-time and historical dashboards in Tableau and conducted data preprocessing with Python to manage large-scale traffic datasets.
                     </p>
                     <a href="#" class="text-green-500 hover:text-green-400">
@@ -381,7 +758,7 @@
         </div>
     </section>
     <div id="resumeModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="bg-white w-11/12 max-w-3xl p-6 rounded-lg">
+        <div class="bg-white w-full max-w-3xl p-6 rounded-lg">
             <div class="flex justify-between items-center">
                 <h2 class="text-xl font-bold">Resume</h2>
                 <button
@@ -431,7 +808,7 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold gradient-text mb-12">Let's Connect</h2>
             <p class="text-gray-300 mb-8">Interested in collaborating or hiring me? Get in touch below.</p>
-            <a href="mailto:example@gmail.com" class="px-8 py-3 bg-green-500 text-gray-900 rounded-md hover:bg-green-600 transition">
+            <a href="mailto:vrajnena44@gmail.com" class="px-8 py-3 bg-green-500 text-gray-900 rounded-md hover:bg-green-600 transition">
                 Contact Me
             </a>
         </div>
