@@ -3,76 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- Basic favicon -->
-      <link rel="icon" href="/logo.png" type="image/png">
-    
-      <!-- iOS devices -->
-      <link rel="apple-touch-icon" href="/logo.png">
-      
-      <!-- Modern browsers - helps with different sizes -->
-      <meta name="theme-color" content="#4CAF50">
-      
-      <!-- Windows tile -->
-      <meta name="msapplication-TileImage" content="/logo.png">
-      <meta name="msapplication-TileColor" content="#4CAF50">
-      
-      <!-- PWA support -->
-      <link rel="manifest" href="/site.webmanifest">
-      <script>
-      const sharp = require('sharp');
-const fs = require('fs').promises;
-
-async function generateFavicons() {
-    const sizes = [16, 32, 64, 192, 512];
-    const inputFile = 'logo.png';
-    
-    try {
-        for (const size of sizes) {
-            await sharp(inputFile)
-                .resize(size, size, {
-                    fit: 'contain',
-                    background: { r: 0, g: 0, b: 0, alpha: 0 }
-                })
-                .png()
-                .toFile(`logo-${size}x${size}.png`);
-            
-            console.log(`Generated ${size}x${size} favicon`);
-        }
-    } catch (error) {
-        console.error('Error generating favicons:', error);
-    }
-}
-
-generateFavicons();
-</script>
     <title>Vraj Nena Portfolio</title>
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
     <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
         .gradient-text {
             background: linear-gradient(to right, #4CAF50, #81C784);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+
         .hover-card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .glass {
@@ -80,82 +28,92 @@ generateFavicons();
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-          /* Base styles for social icons */
-    .social-icon {
-        @apply text-gray-300 transition-all duration-300 ease-in-out transform;
-    }
 
-    /* Hover animations - different for each icon */
-    .social-icon.linkedin:hover {
-        @apply text-blue-500;
-        animation: bounce-rotate 0.6s ease-in-out;
-    }
+        .social-icon {
+            @apply text-gray-300 transition-all duration-300;
+        }
 
-    .social-icon.github:hover {
-        @apply text-purple-500;
-        animation: bounce-up 0.6s ease-in-out;
-    }
+        .social-icon:hover {
+            @apply text-green-500 scale-110;
+        }
 
-    .social-icon.email:hover {
-        @apply text-red-500;
-        animation: shake 0.6s ease-in-out;
-    }
+        /* Enhanced button animations */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
 
-    /* Animation keyframes */
-    @keyframes bounce-rotate {
-        0%, 100% {
-            transform: scale(1) rotate(0deg);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
         }
-        50% {
-            transform: scale(1.2) rotate(10deg);
-        }
-    }
 
-    @keyframes bounce-up {
-        0%, 100% {
-            transform: scale(1) translateY(0);
+        .btn-primary:hover::before {
+            left: 100%;
         }
-        50% {
-            transform: scale(1.2) translateY(-5px);
-        }
-    }
 
-    @keyframes shake {
-        0%, 100% {
-            transform: scale(1) rotate(0deg);
+        .btn-outline {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
         }
-        20% {
-            transform: scale(1.1) rotate(-10deg);
-        }
-        40% {
-            transform: scale(1.1) rotate(10deg);
-        }
-        60% {
-            transform: scale(1.1) rotate(-10deg);
-        }
-        80% {
-            transform: scale(1.1) rotate(10deg);
-        }
-    }
 
-    /* Optional glow effect */
-    .social-icon:hover {
-        filter: drop-shadow(0 0 8px currentColor);
-    }
+        .btn-outline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #4CAF50;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-outline:hover::after {
+            transform: scaleY(1);
+        }
+
+        /* Typing animation for summary */
+        .typing-text {
+            border-right: 2px solid #4CAF50;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(40, end),
+                       blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #4CAF50 }
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-opacity-80 backdrop-blur glass shadow-md">
+    <nav class="fixed top-0 left-0 w-full z-50 glass">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <img src="logo.png" alt="Logo" class="w-10 h-10 rounded-full">
-                <span class="text-2xl font-bold gradient-text">Vraj Nena</span>
-            </div>
+            <span class="text-2xl font-bold gradient-text">Vraj Nena</span>
             <div class="hidden md:flex items-center space-x-6">
                 <a href="#about" class="text-gray-300 hover:text-white transition">About</a>
                 <a href="#experience" class="text-gray-300 hover:text-white transition">Experience</a>
-                <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
                 <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
                 <a href="#contact" class="px-4 py-2 bg-green-500 text-gray-900 font-medium rounded-md hover:bg-green-600 transition">Contact</a>
             </div>
@@ -163,651 +121,236 @@ generateFavicons();
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-90"></div>
-        <div class="container mx-auto px-6 z-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between space-y-12 lg:space-y-0">
-                <div class="text-center lg:text-left space-y-6">
-                    <h1 class="text-5xl lg:text-7xl font-bold gradient-text">Welcome</h1>
-                    <p class="text-gray-300 leading-relaxed text-justify">
-                     <li>I'm a software engineer passionate about building efficient and scalable applications. </li> 
-                     <li>I specialize in distributed systems, RESTful APIs, and integrating AI technologies with cloud platforms.I strive to create impactful solutions while continuously learning and growing. </li> 
-                      
-                  </p>
-                    <div class="flex justify-center lg:justify-start space-x-4">
-                        <a href="#about" class="px-6 py-3 bg-green-500 rounded-md text-gray-900 font-medium hover:bg-green-600 transition">
-                            Learn More
+    <section class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center space-y-6 max-w-3xl mx-auto">
+                <h1 class="text-5xl lg:text-7xl font-bold gradient-text mb-8">Vraj Nena</h1>
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <p class="text-xl text-gray-300 leading-relaxed typing-text">
+                        Versatile technology professional combining expertise as a:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gray-800 p-6 rounded-lg hover-card">
+                            <h3 class="text-green-500 font-semibold mb-2">Software Engineer</h3>
+                            <p class="text-gray-300">Building scalable applications and microservices with modern technologies and best practices</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg hover-card">
+                            <h3 class="text-green-500 font-semibold mb-2">Data Consultant</h3>
+                            <p class="text-gray-300">Implementing CI/CD pipelines and infrastructure automation to streamline development workflows</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg hover-card">
+                            <h3 class="text-green-500 font-semibold mb-2">Cloud Engineer</h3>
+                            <p class="text-gray-300">Designing robust cloud architectures and optimizing system performance across platforms</p>
+                        </div>
+                    </div>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Proven experience with Infrastructure as Code, containerization, and cloud platforms. Specialized in improving system performance and reducing operational costs through efficient automation and architectural solutions.
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#projects" class="btn-primary px-6 py-3 bg-green-500 rounded-md text-gray-900 font-medium hover:bg-green-600 transition flex items-center">
+                            <i class="fas fa-project-diagram mr-2"></i>
+                            View Projects
                         </a>
-                        <button
-                            onclick="showResumeModal()"
-                            class="px-6 py-3 border border-green-500 text-green-500 rounded-md hover:bg-green-500 hover:text-gray-900 transition">
+                        <button onclick="showResumeModal()" class="btn-outline px-6 py-3 border border-green-500 text-green-500 rounded-md hover:text-gray-900 transition flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i>
                             View Resume
                         </button>
                     </div>
                 </div>
-                <div class="protect-content w-80 h-100">
-                  <div class="profile-photo protect-image">
-                      <img src="profile-photo.jpg" alt="Vraj Nena" 
-                           onload="this.src = addNoiseOverlay(this)">
-                      <div class="watermark">Vraj Nena © 2024</div>
-                  </div>
-              </div>
-            </div>
-            <!-- Social Icons -->
-            <div class="flex justify-center lg:justify-start space-x-8 mt-8">
-              <a href="https://linkedin.com/in/vrajnena" 
-                 target="_blank" 
-                 class="social-icon linkedin group relative"
-                 aria-label="LinkedIn Profile">
-                  <i class="fab fa-linkedin text-3xl"></i>
-                  <!-- Tooltip -->
-                  <span class="absolute -top-10 left-1/2 transform -translate-x-1/2 
-                               bg-gray-800 text-white px-2 py-1 rounded text-sm
-                               opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      LinkedIn
-                  </span>
-              </a>
-              
-              <a href="https://github.com/vnen0001" 
-                 target="_blank" 
-                 class="social-icon github group relative"
-                 aria-label="GitHub Profile">
-                  <i class="fab fa-github text-3xl"></i>
-                  <!-- Tooltip -->
-                  <span class="absolute -top-10 left-1/2 transform -translate-x-1/2 
-                               bg-gray-800 text-white px-2 py-1 rounded text-sm
-                               opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      GitHub
-                  </span>
-              </a>
-              
-              <a href="mailto:vrajnena44@gmail.com" 
-                 class="social-icon email group relative"
-                 aria-label="Email Contact">
-                  <i class="fas fa-envelope text-3xl"></i>
-                  <!-- Tooltip -->
-                  <span class="absolute -top-10 left-1/2 transform -translate-x-1/2 
-                               bg-gray-800 text-white px-2 py-1 rounded text-sm
-                               opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      Email
-                  </span>
-              </a>
-          </div>
-            <!-- Scroll Down Arrow -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-                <a href="#about" class="text-gray-300 hover:text-green-500 animate">
-                    <i class="fas fa-chevron-down text-3xl"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center gradient-text mb-12">About Me</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="space-y-6">
-                    <p class="text-gray-300 leading-relaxed text-justify">
-                        I'm a software engineer passionate about building efficient and scalable applications. I specialize in distributed systems, RESTful APIs, and integrating AI technologies with cloud platforms. I strive to create impactful solutions while continuously learning and growing.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed text-justify">
-                        With experience in Agile methodologies and a strong foundation in domain modeling, I have contributed to innovative projects in mental health analytics, object detection, and traffic pattern analysis, leveraging my expertise in Python, Django, and cloud platforms.
-                    </p>
-                    <button
-                        onclick="showResumeModal()"
-                        class="px-6 py-3 bg-green-500 rounded-md text-gray-900 font-medium hover:bg-green-600 transition">
-                        View Resume
-                    </button>
-                </div>
-                <div>
-                    <!-- Updated Spinner Animation -->
-                    <lottie-player
-                        src="https://assets10.lottiefiles.com/private_files/lf30_wqypnpu5.json"
-                        background="transparent"
-                        speed="1"
-                        loop
-                        autoplay
-                        style="width: 300px; height: 300px; margin: 0 auto;">
-                    </lottie-player>
+                
+                <!-- Social Icons -->
+                <div class="flex justify-center space-x-8 mt-8">
+                    <a href="https://linkedin.com/in/vrajnena" target="_blank" class="social-icon">
+                        <i class="fab fa-linkedin text-3xl"></i>
+                    </a>
+                    <a href="https://github.com/vnen0001" target="_blank" class="social-icon">
+                        <i class="fab fa-github text-3xl"></i>
+                    </a>
+                    <a href="mailto:vrajnena44@gmail.com" class="social-icon">
+                        <i class="fas fa-envelope text-3xl"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
-    <section id="experience" class="py-20 bg-gray-800">
-      <div class="container mx-auto px-6">
-          <h2 class="text-4xl font-bold text-center gradient-text mb-12">Professional Experience</h2>
-          <div class="space-y-8">
-              <!-- Experience Card Template -->
-              <div class="bg-gray-700 rounded-lg p-6 hover-card">
-                  <div class="flex justify-between items-start mb-4">
-                      <div>
-                          <h3 class="text-2xl font-semibold">Software Engineer</h3>
-                          <p class="text-green-500">MineExcllence</p>
-                      </div>
-                      <span class="text-gray-400">Aug 2024 - Present</span>
-                  </div>
-                  <ul class="list-disc list-inside text-gray-300 space-y-2">
-                      <li>Assisting Development team in providing AI and Big Data technologies to be integrated in current platform following
-                      Software Development Lifecycle (SDLC).</li>
-              
-                      <li>Created a REST-ful API design by writing code using Fast-API to handle large point cloud files processing and used
-                        Potree library along with React app to visualize and give insights on Stopes.</li>
 
-                      <li>Conducted comprehensive research by reviewing industry papers and technical articles by ensuring client-focused
-                        approach to use knowledge from papers.Followed agile methodologies by collaborative working across cross-cultural
-                        team to build Web Products.</li>
-                        <li>Created 2+ functional requirements for Blast stope recovery for development and Mining Team meeting software
-                          engineering best practices.</li>
-                  </ul>
-                  <div class="mt-4">
-                      <p class="text-gray-400 font-semibold">Technologies:</p>
-                      <div class="flex flex-wrap gap-2 mt-2">
-                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Python</span>
-                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Fast-API</span>
-                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">JavaScript</span>
-                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Drone Data Processing</span>
-                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Potree</span>
-                          <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">React</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-
-    <!-- Skills Section -->
-    <!-- <section id="skills" class="py-20 bg-gray-900">
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-900">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center gradient-text mb-12">Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="hover-card p-6 rounded-lg glass text-center">
-                    <i class="fas fa-code text-4xl text-green-500 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Languages</h3>
-                    <p class="text-gray-300">Python, JavaScript, SQL, R</p>
-                </div>
-                <div class="hover-card p-6 rounded-lg glass text-center">
-                    <i class="fas fa-tools text-4xl text-green-500 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Frameworks</h3>
-                    <p class="text-gray-300">Django, FastAPI, React</p>
-                </div>
-                <div class="hover-card p-6 rounded-lg glass text-center">
-                    <i class="fas fa-cloud text-4xl text-green-500 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Cloud</h3>
-                    <p class="text-gray-300">Azure, AWS, GCP</p>
-                </div>
-                <div class="hover-card p-6 rounded-lg glass text-center">
-                    <i class="fas fa-database text-4xl text-green-500 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Tools</h3>
-                    <p class="text-gray-300">Docker, Kubernetes, Git, Terraform , Ansible</p>
-                </div>
-                <div class="hover-card p-6 rounded-lg glass text-center">
-                    <i class="fas fa-chart-bar text-4xl text-green-500 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Visualization</h3>
-                    <p class="text-gray-300">Power BI, Tableau</p>
+            <h2 class="text-4xl font-bold text-center gradient-text mb-12">Professional Experience</h2>
+            
+            <!-- MineExcellence Experience -->
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-green-500 opacity-20"></div>
+                
+                <div class="hover-card bg-gray-800 rounded-lg p-8 mb-8 relative">
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 -top-4 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                        <div class="w-4 h-4 rounded-full bg-gray-900"></div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-green-500">Software Engineer</h3>
+                            <p class="text-xl text-gray-300">MineExcellence</p>
+                        </div>
+                        <span class="text-gray-400 mt-2 md:mt-0">Aug 2024 - Present</span>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <p class="text-gray-300">Leading the development of innovative solutions for mining operations, focusing on data processing and visualization:</p>
+                        
+                        <div class="bg-gray-700 p-6 rounded-lg space-y-3">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 mt-1 mr-3 flex items-center justify-center">
+                                    <i class="fas fa-check text-xs text-gray-900"></i>
+                                </div>
+                                <p class="text-gray-300">Developed a RESTful API using FastAPI to process large point cloud files, integrating with Potree library for advanced stope visualization in React</p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 mt-1 mr-3 flex items-center justify-center">
+                                    <i class="fas fa-check text-xs text-gray-900"></i>
+                                </div>
+                                <p class="text-gray-300">Implemented infrastructure as code using Terraform, deploying production-ready FastAPI services capable of handling 100+ concurrent requests</p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 mt-1 mr-3 flex items-center justify-center">
+                                    <i class="fas fa-check text-xs text-gray-900"></i>
+                                </div>
+                                <p class="text-gray-300">Achieved 99.9% system uptime through comprehensive monitoring and logging solutions for LiDAR data processing pipeline</p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 mt-1 mr-3 flex items-center justify-center">
+                                    <i class="fas fa-check text-xs text-gray-900"></i>
+                                </div>
+                                <p class="text-gray-300">Created functional requirements for blast stope recovery, collaborating with development and mining teams to ensure best practices</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">FastAPI</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Terraform</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">AWS</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">LiDAR Processing</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <div class="flex justify-center mt-12">
+                <button onclick="showResumeModal()" class="btn-primary px-6 py-3 bg-green-500 rounded-md text-gray-900 font-medium hover:bg-green-600 transition flex items-center">
+                    <i class="fas fa-file-alt mr-2"></i>
+                    View Full Resume
+                </button>
             </div>
         </div>
-        
-    </section> -->
-    <style>
-        .skill-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2rem;
-          padding: 2rem;
-        }
-        
-        .skill-card {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 16px;
-          padding: 2rem;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .skill-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-          background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .skill-icon {
-          width: 48px;
-          height: 48px;
-          margin-bottom: 1rem;
-        }
-        
-        .skill-list {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin-top: 1rem;
-        }
-        
-        .skill-tag {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.9rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-     
-    /* Disable text selection */
-    .protect-content {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
+    </section>
 
-    /* Protect images */
-    .protect-image {
-        pointer-events: none;
-        -webkit-touch-callout: none;
-        position: relative;
-    }
-
-    /* Invisible overlay to prevent right-click */
-    .protect-image::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: transparent;
-        z-index: 1;
-    }
-
-    /* Watermark style */
-    .watermark {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        font-size: 2rem;
-        color: rgba(255, 255, 255, 0.1);
-        white-space: nowrap;
-        pointer-events: none;
-        z-index: 2;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Blur protection on hover/focus */
-    .protect-image img {
-        filter: blur(0px);
-        transition: filter 0.3s ease;
-    }
-
-    .protect-image:hover img,
-    .protect-image:focus img {
-        filter: blur(5px);
-    }
-</style>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-      // Disable right-click on the entire page
-      document.addEventListener('contextmenu', (e) => {
-          e.preventDefault();
-          showWarning();
-      });
-
-      // Disable keyboard shortcuts
-      document.addEventListener('keydown', (e) => {
-          // Prevent Print Screen
-          if (e.key === 'PrintScreen') {
-              e.preventDefault();
-              showWarning();
-          }
-
-          // Prevent Ctrl + Shift + I (Developer Tools)
-          if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-              e.preventDefault();
-              showWarning();
-          }
-
-          // Prevent Ctrl + S (Save)
-          if (e.ctrlKey && e.key === 's') {
-              e.preventDefault();
-              showWarning();
-          }
-
-          // Prevent Ctrl + C (Copy)
-          if (e.ctrlKey && e.key === 'c') {
-              const selection = window.getSelection();
-              if (selection.toString().length > 0) {
-                  e.preventDefault();
-                  showWarning();
-              }
-          }
-      });
-
-      // Disable drag and drop
-      document.addEventListener('dragstart', (e) => {
-          if (e.target.tagName === 'IMG') {
-              e.preventDefault();
-          }
-      });
-
-      // Monitor for screenshots (limited support)
-      if ('mediaDevices' in navigator && 'getDisplayMedia' in navigator.mediaDevices) {
-          navigator.mediaDevices.getDisplayMedia = async () => {
-              showWarning();
-              throw new Error('Screenshot disabled');
-          };
-      }
-
-      // Show warning message
-      function showWarning() {
-          const warningDiv = document.createElement('div');
-          warningDiv.style.cssText = `
-              position: fixed;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              background: rgba(0, 0, 0, 0.9);
-              color: white;
-              padding: 20px;
-              border-radius: 10px;
-              z-index: 10000;
-              text-align: center;
-              animation: fadeIn 0.3s ease;
-          `;
-          warningDiv.innerHTML = `
-              <h3 style="color: #FF4444; margin-bottom: 10px;">⚠️ Content Protected</h3>
-              <p>This content is protected. Please contact for permissions.</p>
-          `;
-
-          document.body.appendChild(warningDiv);
-
-          setTimeout(() => {
-              warningDiv.style.animation = 'fadeOut 0.3s ease';
-              setTimeout(() => {
-                  document.body.removeChild(warningDiv);
-              }, 300);
-          }, 2000);
-      }
-
-      // Add protection to images
-      const images = document.querySelectorAll('img');
-      images.forEach(img => {
-          const container = document.createElement('div');
-          container.className = 'protect-image';
-          img.parentNode.insertBefore(container, img);
-          container.appendChild(img);
-          
-          // Add watermark
-          const watermark = document.createElement('div');
-          watermark.className = 'watermark';
-          watermark.textContent = 'Vraj Nena © 2024';
-          container.appendChild(watermark);
-      });
-
-      // Disable developer tools (basic protection)
-      function disableDevTools() {
-          if (window.devtools.isOpen) {
-              window.location.href = "about:blank";
-          }
-      }
-      setInterval(disableDevTools, 1000);
-
-      // Disable source view
-      document.onkeypress = function (event) {
-          event = (event || window.event);
-          if (event.keyCode == 123) {
-              return false;
-          }
-      }
-  });
-
-  // Add dynamic noise overlay to images
-  function addNoiseOverlay(image) {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      
-      canvas.width = image.width;
-      canvas.height = image.height;
-      
-      // Draw image
-      ctx.drawImage(image, 0, 0);
-      
-      // Add subtle noise
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
-      
-      for (let i = 0; i < data.length; i += 4) {
-          const noise = Math.random() * 10 - 5;
-          data[i] += noise;     // Red
-          data[i + 1] += noise; // Green
-          data[i + 2] += noise; // Blue
-      }
-      
-      ctx.putImageData(imageData, 0, 0);
-      return canvas.toDataURL();
-  }
-</script>
-
-    <section id="skills" class="bg-gray-900 text-white py-20">
-        <div class="container mx-auto px-4">
-          <h2 class="text-4xl font-bold text-center mb-12">
-            Technical Skills
-          </h2>
-          
-          <div class="skill-grid">
-            <!-- Programming Languages -->
-            <div class="skill-card">
-              <i class="fas fa-code text-4xl mb-4 text-blue-400"></i>
-              <h3 class="text-xl font-semibold mb-4">Programming Languages</h3>
-              <div class="skill-list">
-                <span class="skill-tag">
-                  <i class="fab fa-python text-yellow-400"></i>
-                  Python
-                </span>
-                <span class="skill-tag">
-                  <i class="fab fa-js text-yellow-300"></i>
-                  JavaScript
-                </span>
-                <span class="skill-tag">
-                  <i class="fas fa-database text-blue-300"></i>
-                  SQL
-                </span>
-                <span class="skill-tag">
-                  <i class="fas fa-chart-line text-blue-400"></i>
-                  R
-                </span>
-              </div>
-            </div>
-    
-            <!-- Frameworks -->
-            <div class="skill-card">
-              <i class="fas fa-layer-group text-4xl mb-4 text-green-400"></i>
-              <h3 class="text-xl font-semibold mb-4">Frameworks</h3>
-              <div class="skill-list">
-                <span class="skill-tag">
-                  <i class="fab fa-python text-green-500"></i>
-                  Django
-                </span>
-                <span class="skill-tag">
-                  <i class="fas fa-bolt text-yellow-400"></i>
-                  FastAPI
-                </span>
-                <span class="skill-tag">
-                  <i class="fab fa-react text-blue-400"></i>
-                  React
-                </span>
-              </div>
-            </div>
-    
-            <!-- Cloud Services -->
-            <div class="skill-card">
-              <i class="fas fa-cloud text-4xl mb-4 text-purple-400"></i>
-              <h3 class="text-xl font-semibold mb-4">Cloud Platforms</h3>
-              <div class="skill-list">
-                <span class="skill-tag">
-                  <i class="fab fa-microsoft text-blue-400"></i>
-                  Azure
-                </span>
-                <span class="skill-tag">
-                  <i class="fab fa-aws text-orange-400"></i>
-                  AWS
-                </span>
-                <span class="skill-tag">
-                  <i class="fab fa-google text-red-400"></i>
-                  GCP
-                </span>
-              </div>
-            </div>
-    
-            <!-- DevOps Tools -->
-            <div class="skill-card">
-              <i class="fas fa-tools text-4xl mb-4 text-red-400"></i>
-              <h3 class="text-xl font-semibold mb-4">DevOps Tools</h3>
-              <div class="skill-list">
-                <span class="skill-tag">
-                  <i class="fab fa-docker text-blue-400"></i>
-                  Docker
-                </span>
-                <span class="skill-tag">
-                  <i class="fas fa-dharmachakra text-blue-500"></i>
-                  Kubernetes
-                </span>
-                <span class="skill-tag">
-                  <i class="fab fa-git-alt text-orange-500"></i>
-                  Git
-                </span>
-                <span class="skill-tag">
-                  <i class="fas fa-cube text-purple-400"></i>
-                  Terraform
-                </span>
-              </div>
-            </div>
-    
-            <!-- Data Visualization -->
-            <div class="skill-card">
-              <i class="fas fa-chart-bar text-4xl mb-4 text-yellow-400"></i>
-              <h3 class="text-xl font-semibold mb-4">Data Visualization</h3>
-              <div class="skill-list">
-                <span class="skill-tag">
-                  <i class="fas fa-chart-pie text-yellow-500"></i>
-                  Power BI
-                </span>
-                <span class="skill-tag">
-                  <i class="fas fa-chart-area text-blue-400"></i>
-                  Tableau
-                </span>
-              </div>
-            </div>
-    
-            <!-- Big Data -->
-            <div class="skill-card">
-              <i class="fas fa-database text-4xl mb-4 text-orange-400"></i>
-              <h3 class="text-xl font-semibold mb-4">Big Data Technologies</h3>
-              <div class="skill-list">
-                <span class="skill-tag">
-                  <i class="fas fa-stream text-red-400"></i>
-                  Apache Kafka
-                </span>
-                <span class="skill-tag">
-                  <i class="fas fa-fire text-orange-500"></i>
-                  Apache Spark
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     <!-- Projects Section -->
     <section id="projects" class="py-20 bg-gray-800">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center gradient-text mb-12">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project: Vital Voices -->
-                <div class="bg-gray-700 rounded-lg p-6 hover-card">
-                    <h3 class="text-2xl font-semibold mb-4">Vital Voices of Change</h3>
-                    <p class="text-gray-400 mb-4 text-justify">
-                        Developed a fault-tolerant system to analyze mental health trends focusing on men's mental health and gambling. Designed a data warehouse with ETL pipelines, integrated a 3D chatbot using Django and Azure AI Speech API, and implemented Redis with Celery workers for asynchronous tasks.
+            <h2 class="text-4xl font-bold text-center gradient-text mb-12">Featured Projects</h2>
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Gambling Prevention Website -->
+                <div class="bg-gray-700 rounded-lg p-8 hover-card">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-2">Gambling Prevention Website</h3>
+                            <a href="https://github.com/vnen0001/celery-reds/tree/development" class="text-green-500 hover:text-green-400 inline-flex items-center">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Django</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Redis</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Celery</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Azure AI</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        A distributed system for mental health data analysis focusing on gambling prevention. The platform features:
                     </p>
-                    <a href="https://github.com/vnen0001/celery-reds/tree/development" class="text-green-500 hover:text-green-400">
-                        View Project <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>ETL pipelines and Apache Airflow for data warehouse management</li>
+                        <li>CI/CD pipelines for automated deployment across environments</li>
+                        <li>Redis and Celery workers for asynchronous task processing</li>
+                        <li>Interactive 3D visualization with Azure AI Speech API integration</li>
+                        <li>Robust data security measures for sensitive health information</li>
+                    </ul>
                 </div>
-                <!-- Project: Object Detection -->
-                <div class="bg-gray-700 rounded-lg p-6 hover-card">
-                    <h3 class="text-2xl font-semibold mb-4">Object Detection on Kubernetes</h3>
-                    <p class="text-gray-400 mb-4 text-justify">
-                        Built a scalable platform for object detection using machine learning models deployed on Kubernetes. Used Terraform for VM configuration and React for the frontend, demonstrating containerization and orchestration expertise.
+
+                <!-- Object Detection Platform -->
+                <div class="bg-gray-700 rounded-lg p-8 hover-card">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-2">Object Detection Platform</h3>
+                            <a href="https://github.com/vnen0001/object-detection" class="text-green-500 hover:text-green-400 inline-flex items-center">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Kubernetes</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Docker</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Terraform</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">ML</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        A scalable platform for object detection using machine learning models deployed on Kubernetes. Key features include:
                     </p>
-                    <a href="#" class="text-green-500 hover:text-green-400">
-                        View Project <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>VM configuration using Terraform and Ansible on Oracle Cloud</li>
+                        <li>Containerized machine learning models deployed on Kubernetes</li>
+                        <li>React frontend containerized and deployed on Kubernetes</li>
+                        <li>Load testing with Locust supporting 10+ concurrent users</li>
+                        <li>Advanced Linux configuration for Kubernetes cluster setup</li>
+                    </ul>
                 </div>
-                <!-- Project: Traffic Analysis -->
-                <div class="bg-gray-700 rounded-lg p-6 hover-card">
-                    <h3 class="text-2xl font-semibold mb-4">Traffic Congestion Analysis</h3>
-                    <p class="text-gray-400 mb-4 text-justify">
-                        Analyzed Melbourne's traffic patterns using VicRoads API. Created real-time and historical dashboards in Tableau and conducted data preprocessing with Python to manage large-scale traffic datasets.
+
+                <!-- Melbourne Trains Dashboard -->
+                <div class="bg-gray-700 rounded-lg p-8 hover-card">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-2">Melbourne Trains Dashboard</h3>
+                            <a href="https://github.com/vnen0001/Melbourne-GTFS" class="text-green-500 hover:text-green-400 inline-flex items-center">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Apache Kafka</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Apache Spark</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">Power BI</span>
+                            <span class="px-3 py-1 bg-gray-600 rounded-full text-sm">GCP</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        A real-time dashboard for Melbourne's metro train system featuring:
                     </p>
-                    <a href="#" class="text-green-500 hover:text-green-400">
-                        View Project <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Real-time train location tracking using GTFS data</li>
+                        <li>Apache Airflow for scheduled data fetching</li>
+                        <li>Apache Kafka and Spark for stream processing</li>
+                        <li>Infrastructure deployment on GCP using Terraform</li>
+                        <li>Live statistics for train delays and disruptions</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
-    <div id="resumeModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="bg-white w-full max-w-3xl p-6 rounded-lg">
-            <div class="flex justify-between items-center">
-                <h2 class="text-xl font-bold">Resume</h2>
-                <button
-                    onclick="closeResumeModal()"
-                    class="text-gray-600 hover:text-gray-800 text-2xl font-bold">
-                    &times;
-                </button>
-            </div>
-            <iframe
-                id="resumeIframe"
-                src=""
-                class="w-full h-96 mt-4 border rounded-lg"
-                frameborder="0">
-            </iframe>
-            <div class="text-right mt-4">
-                <a href="https://drive.google.com/file/d/YOUR_GOOGLE_DRIVE_FILE_ID/view?usp=share_link"
-                   target="_blank"
-                   class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-                    Download Resume
-                </a>
-            </div>
-        </div>
-    </div>
-    <button id="scrollToTop" class="fixed bottom-10 right-10 hidden p-3 bg-green-500 rounded-full text-white shadow-lg hover:bg-green-600">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    
-    <script>
-        // Show/Hide Scroll to Top Button
-        window.addEventListener('scroll', () => {
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            if (window.scrollY > 200) {
-                scrollToTopBtn.classList.remove('hidden');
-            } else {
-                scrollToTopBtn.classList.add('hidden');
-            }
-        });
-    
-        // Scroll to Top
-        document.getElementById('scrollToTop').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-900">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold gradient-text mb-12">Let's Connect</h2>
-            <p class="text-gray-300 mb-8">Interested in collaborating or hiring me? Get in touch below.</p>
+            <p class="text-gray-300 mb-8">Interested in collaborating or discussing opportunities? Get in touch!</p>
             <a href="mailto:vrajnena44@gmail.com" class="px-8 py-3 bg-green-500 text-gray-900 rounded-md hover:bg-green-600 transition">
                 Contact Me
             </a>
@@ -817,41 +360,34 @@ generateFavicons();
     <footer class="py-8 bg-gray-800 text-center text-gray-500">
         <p>&copy; 2024 Vraj Nena. All rights reserved.</p>
     </footer>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white w-full max-w-3xl p-6 rounded-lg">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold text-gray-900">Resume</h2>
+                <button onclick="closeResumeModal()" class="text-gray-600 hover:text-gray-800 text-2xl font-bold">
+                    &times;
+                </button>
+            </div>
+            <iframe id="resumeIframe" class="w-full h-96 mt-4 border rounded-lg"></iframe>
+        </div>
+    </div>
+
     <script>
-        // Functions to handle resume modal
         function showResumeModal() {
             const modal = document.getElementById('resumeModal');
             const iframe = document.getElementById('resumeIframe');
-            iframe.src = 'https://drive.google.com/file/d/1XHqrvyOALI0-W-J__V5U4RbMKY5QaHLi/preview';
+            iframe.src = 'https://docs.google.com/document/d/1xg9opy40OjfQ7qE2a6PaFX6woE40ncYh/preview';
             modal.classList.remove('hidden');
         }
-    
+
         function closeResumeModal() {
             const modal = document.getElementById('resumeModal');
-            modal.classList.add('hidden');
             const iframe = document.getElementById('resumeIframe');
-            iframe.src = ''; // Clear iframe source
+            modal.classList.add('hidden');
+            iframe.src = '';
         }
     </script>
-      <!-- Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGBMY1BKCV"></script>
-      <script>
-          const isDevEnvironment = () => {
-              const hostname = window.location.hostname;
-              return hostname === "localhost" 
-                     || hostname === "127.0.0.1"
-                     || hostname.includes(".local")
-                     || hostname.includes(".test");
-          };
-          
-          if (isDevEnvironment()) {
-              window['gtag-disable-G-FGBMY1BKCV'] = true;
-          }
-          
-          window.dataLayer = window.dataLayer || [];
-          function gtag() { dataLayer.push(arguments); }
-          gtag('js', new Date());
-          gtag('config', 'G-FGBMY1BKCV');
-          </script>
 </body>
 </html>
